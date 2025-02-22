@@ -6,135 +6,81 @@
     <title>Crucigrama Ciberseguridad</title>
     <link rel="stylesheet" href="colors.css">
     <script defer src="cruci.js"></script>
-    <style>
-        body {
-            background: linear-gradient(135deg, #b2ebf2 0%, #ffe0b2 100%);
-            font-family: 'Comic Sans MS', cursive, sans-serif;
-            margin: 0;
-            padding: 20px;
-            text-align: center;
-        }
-        .container {
-            display: flex;
-            max-width: 1200px;
-            margin: 0 auto;
-            background: #fff;
-            border-radius: 15px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-            padding: 20px;
-        }
-        .clues {
-            flex: 1;
-            padding: 15px;
-            border-radius: 10px;
-            text-align: left;
-        }
-        .crossword-container {
-            flex: 2;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-            overflow: hidden;
-        }
-        table {
-            border-collapse: collapse;
-            table-layout: fixed;
-        }
-        td {
-            width: 50px;
-            height: 50px;
-            border: 2px solid #FFB74D;
-            text-align: center;
-            position: relative;
-        }
-        td input {
-            width: 100%;
-            height: 100%;
-            border: none;
-            background: transparent;
-            text-align: center;
-            font-size: 22px;
-            font-weight: bold;
-            text-transform: uppercase;
-            color: #444;
-            cursor: pointer;
-        }
-        .correct {
-            background-color: #8BC34A !important;
-        }
-        .incorrect {
-            background-color: #FF7043 !important;
-        }
-    </style>
 </head>
 <body>
-<h1>Crucigrama: Ciberseguridad</h1>
-<div class="container">
-    <div class="clues">
-        <h2>Definiciones <span class="highlight">Cada palabra vale 8 puntos. ¡Tienes 5 intentos!</span></h2>
-        <ol>
-            <li>Filtra correos no deseados (4 letras)</li>
-            <li>Red Privada Virtual (3 letras)</li>
-            <li>Copia de seguridad de datos (6 letras)</li>
-            <li>Archivo que guarda sitios con tu info (6 letras)</li>
-            <li>Software que protege contra virus (9 letras)</li>
-            <li>Barra el tráfico de red no autorizado (7 letras)</li>
-        </ol>
-        <button id="checkBtn">Verificar</button>
-        <button id="resetBtn">Reiniciar</button>
-        <p id="feedback"></p>
+    <h1>Crucigrama: Ciberseguridad</h1>
+    <div class="container">
+        <div class="clues">
+            <h2>Definiciones <span class="highlight">Cada palabra vale 8 puntos. ¡Tienes <span id="attempts">5</span> intentos!</span></h2>
+            <ol>
+                <li>Filtra correos no deseados (4 letras)</li>
+                <li>Red Privada Virtual (3 letras)</li>
+                <li>Copia de seguridad de datos (6 letras)</li>
+                <li>Archivo que guarda sitios con tu info (6 letras)</li>
+                <li>Software que protege contra virus (9 letras)</li>
+                <li>Barra el tráfico de red no autorizado (7 letras)</li>
+            </ol>
+            <button id="checkBtn">Verificar</button>
+            <button id="resetBtn">Reiniciar</button>
+            <p id="feedback"></p>
+        </div>
+        <div class="crossword-container">
+            <table id="crossword">
+                <!-- Fila 1 -->
+                <tr>
+                    <td><input maxlength="1"></td>
+                    <td><input maxlength="1"></td>
+                    <td><input maxlength="1"></td>
+                    <td><input maxlength="1"></td>
+                </tr>
+                <!-- Fila 2 -->
+                <tr>
+                    <td><span class="num-label">2</span><input maxlength="1"></td>
+                    <td><input maxlength="1"></td>
+                    <td><input maxlength="1"></td>
+                </tr>
+                <!-- Fila 3 -->
+                <tr>
+                    <td><span class="num-label">3</span><input maxlength="1"></td>
+                    <td><input maxlength="1"></td>
+                    <td><input maxlength="1"></td>
+                    <td><input maxlength="1"></td>
+                    <td><input maxlength="1"></td>
+                    <td><input maxlength="1"></td>
+                </tr>
+                <!-- Fila 4 -->
+                <tr>
+                    <td><span class="num-label">4</span><input maxlength="1"></td>
+                    <td><input maxlength="1"></td>
+                    <td><input maxlength="1"></td>
+                    <td><input maxlength="1"></td>
+                    <td><input maxlength="1"></td>
+                    <td><input maxlength="1"></td>
+                </tr>
+                <!-- Fila 5 -->
+                <tr>
+                    <td><span class="num-label">5</span><input maxlength="1"></td>
+                    <td><input maxlength="1"></td>
+                    <td><input maxlength="1"></td>
+                    <td><input maxlength="1"></td>
+                    <td><input maxlength="1"></td>
+                    <td><input maxlength="1"></td>
+                    <td><input maxlength="1"></td>
+                    <td><input maxlength="1"></td>
+                    <td><input maxlength="1"></td>
+                </tr>
+                <!-- Fila 6 -->
+                <tr>
+                    <td><span class="num-label">6</span><input maxlength="1"></td>
+                    <td><input maxlength="1"></td>
+                    <td><input maxlength="1"></td>
+                    <td><input maxlength="1"></td>
+                    <td><input maxlength="1"></td>
+                    <td><input maxlength="1"></td>
+                    <td><input maxlength="1"></td>
+                </tr>
+            </table>
+        </div>
     </div>
-    <div class="crossword-container">
-        <table>
-            <tr>
-                <td><span class="num-label">1</span><input maxlength="1"></td>
-                <td><input maxlength="1"></td>
-                <td><input maxlength="1"></td>
-                <td><input maxlength="1"></td>
-            </tr>
-            <tr>
-                <td><span class="num-label">2</span><input maxlength="1"></td>
-                <td><input maxlength="1"></td>
-                <td><input maxlength="1"></td>
-            </tr>
-            <tr>
-                <td><span class="num-label">3</span><input maxlength="1"></td>
-                <td><input maxlength="1"></td>
-                <td><input maxlength="1"></td>
-                <td><input maxlength="1"></td>
-                <td><input maxlength="1"></td>
-                <td><input maxlength="1"></td>
-            </tr>
-            <tr>
-                <td><span class="num-label">4</span><input maxlength="1"></td>
-                <td><input maxlength="1"></td>
-                <td><input maxlength="1"></td>
-                <td><input maxlength="1"></td>
-            </tr>
-            <tr>
-                <td><span class="num-label">5</span><input maxlength="1"></td>
-                <td><input maxlength="1"></td>
-                <td><input maxlength="1"></td>
-                <td><input maxlength="1"></td>
-                <td><input maxlength="1"></td>
-                <td><input maxlength="1"></td>
-                <td><input maxlength="1"></td>
-                <td><input maxlength="1"></td>
-                <td><input maxlength="1"></td>
-            </tr>
-            <tr>
-                <td><span class="num-label">6</span><input maxlength="1"></td>
-                <td><input maxlength="1"></td>
-                <td><input maxlength="1"></td>
-                <td><input maxlength="1"></td>
-                <td><input maxlength="1"></td>
-                <td><input maxlength="1"></td>
-                <td><input maxlength="1"></td>
-            </tr>
-        </table>
-    </div>
-</div>
 </body>
 </html>
-
