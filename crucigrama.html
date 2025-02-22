@@ -71,6 +71,14 @@
       color: #444;
       cursor: pointer;
     }
+    .num-label {
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      font-size: 14px;
+      font-weight: bold;
+      color: #D32F2F;
+    }
     .empty {
       background: #ccc; 
       border: 2px solid #ccc;
@@ -99,7 +107,7 @@
   <div class="crossword-container">
     <table>
       <tr>
-        <td><input data-letter="S" maxlength="1"></td>
+        <td><span class="num-label">1</span><input data-letter="S" maxlength="1"></td>
         <td><input data-letter="P" maxlength="1"></td>
         <td><input data-letter="A" maxlength="1"></td>
         <td><input data-letter="M" maxlength="1"></td>
@@ -108,10 +116,10 @@
         <td class="empty"></td>
         <td class="empty"></td>
         <td class="empty"></td>
-        <td><input data-letter="V" maxlength="1"></td>
+        <td><span class="num-label">2</span><input data-letter="V" maxlength="1"></td>
       </tr>
       <tr>
-        <td><input data-letter="B" maxlength="1"></td>
+        <td><span class="num-label">3</span><input data-letter="B" maxlength="1"></td>
         <td><input data-letter="A" maxlength="1"></td>
         <td><input data-letter="C" maxlength="1"></td>
         <td><input data-letter="K" maxlength="1"></td>
@@ -119,7 +127,7 @@
         <td><input data-letter="P" maxlength="1"></td>
       </tr>
       <tr>
-        <td><input data-letter="C" maxlength="1"></td>
+        <td><span class="num-label">4</span><input data-letter="C" maxlength="1"></td>
         <td><input data-letter="O" maxlength="1"></td>
         <td><input data-letter="O" maxlength="1"></td>
         <td><input data-letter="K" maxlength="1"></td>
@@ -127,7 +135,7 @@
         <td><input data-letter="E" maxlength="1"></td>
       </tr>
       <tr>
-        <td><input data-letter="A" maxlength="1"></td>
+        <td><span class="num-label">5</span><input data-letter="A" maxlength="1"></td>
         <td><input data-letter="N" maxlength="1"></td>
         <td><input data-letter="T" maxlength="1"></td>
         <td><input data-letter="I" maxlength="1"></td>
@@ -137,19 +145,10 @@
         <td><input data-letter="U" maxlength="1"></td>
         <td><input data-letter="S" maxlength="1"></td>
       </tr>
-      <tr>
-        <td><input data-letter="F" maxlength="1"></td>
-        <td><input data-letter="I" maxlength="1"></td>
-        <td><input data-letter="R" maxlength="1"></td>
-        <td><input data-letter="E" maxlength="1"></td>
-        <td><input data-letter="W" maxlength="1"></td>
-        <td><input data-letter="A" maxlength="1"></td>
-        <td><input data-letter="L" maxlength="1"></td>
-        <td><input data-letter="L" maxlength="1"></td>
-      </tr>
     </table>
   </div>
 </div>
 </body>
 </html>
+
 
