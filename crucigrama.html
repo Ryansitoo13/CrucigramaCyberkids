@@ -22,7 +22,15 @@
       border-radius: 15px;
       box-shadow: 0 0 10px rgba(0,0,0,0.1);
       padding: 20px;
-      text-align: center;
+      text-align: left;
+      display: flex;
+    }
+    .clues {
+      flex: 1;
+      background: #f7f7f7;
+      padding: 15px;
+      border-radius: 10px;
+      margin-right: 20px;
     }
     .crossword-container {
       display: inline-block;
@@ -63,11 +71,51 @@
       font-weight: bold;
       color: #D32F2F;
     }
+    .btn {
+      display: inline-block;
+      padding: 10px 20px;
+      margin: 10px;
+      font-size: 16px;
+      border-radius: 8px;
+      color: #fff;
+      cursor: pointer;
+      border: none;
+      transition: background 0.3s ease;
+    }
+    .btn-check {
+      background-color: #3498db;
+    }
+    .btn-check:hover {
+      background-color: #2ecc71;
+    }
+    .btn-reset {
+      background-color: #e74c3c;
+    }
+    .btn-reset:hover {
+      background-color: #c0392b;
+    }
   </style>
 </head>
 <body>
+<h1>Crucigrama: Ciberseguridad</h1>
 <div class="container">
-  <h1>Crucigrama: Ciberseguridad</h1>
+  <div class="clues">
+    <h2>Definiciones</h2>
+    <ol>
+      <li>Filtra correos no deseados (4 letras)</li>
+      <li>Red Privada Virtual (3 letras)</li>
+      <li>Copia de seguridad de datos (6 letras)</li>
+      <li>Archivo que guardan sitios con tu info (6 letras)</li>
+      <li>Software que protege contra virus (9 letras)</li>
+      <li>Barra el tráfico de red no autorizado (7 letras)</li>
+      <li>Programa que espía tu actividad (7 letras)</li>
+      <li>Red de dispositivos infectados (6 letras)</li>
+      <li>Transformación irreversible de datos (7 letras)</li>
+      <li>Método de acceso oculto en un sistema (8 letras)</li>
+    </ol>
+    <button class="btn btn-check" id="checkBtn">Verificar</button>
+    <button class="btn btn-reset" id="resetBtn">Reiniciar</button>
+  </div>
   <div class="crossword-container">
     <table>
       <tr>
@@ -120,6 +168,5 @@
 </div>
 </body>
 </html>
-
 
 
