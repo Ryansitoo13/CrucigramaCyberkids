@@ -1,31 +1,33 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>Crucigrama Ciberseguridad</title>
+  <meta charset="UTF-8" />
+  <title>Crucigrama Ciberseguridad con Definiciones</title>
   <style>
     body {
-      background: linear-gradient(135deg, #b2ebf2 0%, #ffe0b2 100%); /* Cambiado gradiente */
+      background: linear-gradient(135deg, #b2ebf2 0%, #ffe0b2 100%);
       font-family: 'Comic Sans MS', cursive, sans-serif;
       margin: 0;
       padding: 20px;
       text-align: center;
     }
+
     h1 {
-      color: #F57C00; 
+      color: #F57C00;
       text-shadow: 1px 1px 2px #fff;
     }
+
     .container {
       max-width: 700px;
       margin: 0 auto;
-      background: #fff;         /* Fondo blanco para destacar */
+      background: #fff;
       border-radius: 15px;
       box-shadow: 0 0 10px rgba(0,0,0,0.1);
       padding: 20px;
       text-align: center;
     }
 
-    /* Sección de info (intentos, puntuación) */
+    /* Info de intentos y puntuación */
     #info {
       font-size: 18px;
       margin-bottom: 10px;
@@ -33,33 +35,41 @@
     }
     #info span {
       font-weight: bold;
-      color: #e74c3c; /* rojo para intentos */
+      color: #e74c3c;
     }
     #scoreDisplay {
       font-weight: bold;
-      color: #2ecc71; /* verde para la puntuación */
+      color: #2ecc71;
     }
 
-    /* Lista de palabras a buscar */
-    #wordList {
-      margin: 10px 0;
-      font-size: 16px;
-      color: #333;
+    /* Sección de definiciones (clues) */
+    .clues {
+      text-align: left;
+      background: #f7f7f7;
+      padding: 10px;
+      border-radius: 10px;
+      margin-bottom: 20px;
     }
-    #wordList li {
-      margin: 4px 0;
-      list-style: none;
-      background: #fff3e0; /* naranja muy suave */
-      display: inline-block;
-      padding: 5px 10px;
-      border-radius: 8px;
-      box-shadow: 0 0 3px rgba(0,0,0,0.1);
+    .clues h2 {
+      font-size: 18px;
+      color: #333;
+      margin-bottom: 8px;
+    }
+    .clues ol {
+      margin: 0;
+      padding-left: 20px;
+    }
+    .clues li {
+      margin: 8px 0;
+      font-size: 16px;
+      color: #555;
+      font-weight: bold;
     }
 
     /* Contenedor del crucigrama */
     .crossword-container {
       display: inline-block;
-      background-color: #f5f5f5; /* Fondo gris claro para resaltar la tabla */
+      background-color: #f5f5f5; 
       padding: 15px;
       border-radius: 10px;
       border: 2px solid #ccc;
@@ -76,8 +86,6 @@
       background-color: #FFF9C4; 
       position: relative;
     }
-
-    /* Inputs de casilla */
     td input {
       width: 100%;
       height: 100%;
@@ -92,9 +100,8 @@
     }
     td input:focus {
       outline: 2px solid #3498db;
-      background-color: #fff9e6; /* Ligeramente distinto al resto */
+      background-color: #fff9e6;
     }
-
     .empty {
       background: #ccc; 
       border: 2px solid #ccc;
@@ -134,82 +141,82 @@
     }
   </style>
 </head>
-
 <body>
 <div class="container">
   <h1>Crucigrama: Ciberseguridad</h1>
-  <p>Completa las 4 palabras. Cada palabra vale 8 puntos. ¡Tienes 5 intentos!</p>
+  <p>Completa las palabras a partir de sus definiciones. Cada palabra vale 8 puntos. ¡Tienes 5 intentos!</p>
 
-  <!-- Muestra la lista de palabras que el usuario busca -->
-  <ul id="wordList">
-    <li>SPAM</li>
-    <li>VPN</li>
-    <li>BACKUP</li>
-    <li>COOKIE</li>
-  </ul>
+  <!-- Sección de definiciones / pistas -->
+  <div class="clues">
+    <h2>Definiciones</h2>
+    <ol>
+      <li><strong>1.</strong> Filtra correos no deseados (4 letras)</li>
+      <li><strong>2.</strong> Red Privada Virtual (3 letras)</li>
+      <li><strong>3.</strong> Copia de seguridad de datos (6 letras)</li>
+      <li><strong>4.</strong> Archivo que guardan sitios con tu info (6 letras)</li>
+    </ol>
+  </div>
 
-  <!-- Info de intentos y puntuación -->
   <div id="info">
     Intentos restantes: <span id="attemptsLeft">5</span> |
     Puntuación: <span id="scoreDisplay">0</span>
   </div>
 
-  <!-- Contenedor del crucigrama con fondo distinto -->
   <div class="crossword-container">
     <table>
-      <!-- Fila 1 (SPAM horizontal) -->
+      <!-- Fila 1 => SPAM (4 letras) col1-4 -->
       <tr>
-        <td><input data-letter="S" data-word="SPAM" maxlength="1"></td>
-        <td><input data-letter="P" data-word="SPAM" maxlength="1"></td>
-        <td><input data-letter="A" data-word="SPAM" maxlength="1"></td>
-        <td><input data-letter="M" data-word="SPAM" maxlength="1"></td>
+        <td><input data-letter="S" data-word="1" maxlength="1"></td>
+        <td><input data-letter="P" data-word="1" maxlength="1"></td>
+        <td><input data-letter="A" data-word="1" maxlength="1"></td>
+        <td><input data-letter="M" data-word="1" maxlength="1"></td>
         <td class="empty"></td>
         <td><input maxlength="1"></td>
         <td><input maxlength="1"></td>
       </tr>
 
-      <!-- Fila 2 (VPN vertical col6 => fila2-4) -->
+      <!-- Fila 2 => VPN (vertical col6 => fila2-4) -->
       <tr>
         <td class="empty"></td>
         <td class="empty"></td>
         <td class="empty"></td>
         <td class="empty"></td>
         <td class="empty"></td>
-        <td><input data-letter="V" data-word="VPN" maxlength="1"></td>
-        <td><input data-letter="P" maxlength="1"></td>
+        <td><input data-letter="V" data-word="2" maxlength="1"></td>
+        <td><input maxlength="1"></td>
       </tr>
 
-      <!-- Fila 3 (BACKUP horizontal col1-6) -->
+      <!-- Fila 3 => BACKUP horizontal col1-6 (6 letras) -->
       <tr>
-        <td><input data-letter="B" data-word="BACKUP" maxlength="1"></td>
-        <td><input data-letter="A" data-word="BACKUP" maxlength="1"></td>
-        <td><input data-letter="C" data-word="BACKUP" maxlength="1"></td>
-        <td><input data-letter="K" data-word="BACKUP" maxlength="1"></td>
-        <td><input data-letter="U" data-word="BACKUP" maxlength="1"></td>
-        <td><input data-letter="P" data-word="BACKUP" maxlength="1"></td>
-        <td class="empty"></td>
-      </tr>
-
-      <!-- Fila 4 (N de VPN) -->
-      <tr>
-        <td class="empty"></td>
-        <td class="empty"></td>
-        <td class="empty"></td>
-        <td class="empty"></td>
-        <td class="empty"></td>
-        <td><input data-letter="N" data-word="VPN" maxlength="1"></td>
+        <td><input data-letter="B" data-word="3" maxlength="1"></td>
+        <td><input data-letter="A" data-word="3" maxlength="1"></td>
+        <td><input data-letter="C" data-word="3" maxlength="1"></td>
+        <td><input data-letter="K" data-word="3" maxlength="1"></td>
+        <td><input data-letter="U" data-word="3" maxlength="1"></td>
+        <td><input data-letter="P" data-word="3" maxlength="1"></td>
         <td class="empty"></td>
       </tr>
 
-      <!-- Fila 5 (COOKIE horizontal col2-7) -->
+      <!-- Fila 4 => N de VPN (fila4 col6) -->
       <tr>
         <td class="empty"></td>
-        <td><input data-letter="C" data-word="COOKIE" maxlength="1"></td>
-        <td><input data-letter="O" data-word="COOKIE" maxlength="1"></td>
-        <td><input data-letter="O" data-word="COOKIE" maxlength="1"></td>
-        <td><input data-letter="K" data-word="COOKIE" maxlength="1"></td>
-        <td><input data-letter="I" data-word="COOKIE" maxlength="1"></td>
-        <td><input data-letter="E" data-word="COOKIE" maxlength="1"></td>
+        <td class="empty"></td>
+        <td class="empty"></td>
+        <td class="empty"></td>
+        <td class="empty"></td>
+        <td><input data-letter="N" data-word="2" maxlength="1"></td>
+        <td class="empty"></td>
+      </tr>
+
+      <!-- Fila 5 => COOKIE horizontal col2-7 (6 letras) -->
+      <tr>
+        <td class="empty"></td>
+        <td><input data-letter="C" data-word="4" maxlength="1"></td>
+        <td><input data-letter="O" data-word="4" maxlength="1"></td>
+        <td><input data-letter="O" data-word="4" maxlength="1"></td>
+        <td><input data-letter="K" data-word="4" maxlength="1"></td>
+        <td><input data-letter="I" data-word="4" maxlength="1"></td>
+        <td><input data-letter="E" data-word="4" maxlength="1"></td>
       </tr>
 
       <!-- Fila 6 (vacía) -->
@@ -235,12 +242,13 @@
   let attempts = 5;
   let score = 0;
 
-  // Para evitar dar puntos dos veces por la misma palabra
-  let rewardedWords = {
-    SPAM: false,
-    VPN: false,
-    BACKUP: false,
-    COOKIE: false
+  // Mapeo para saber cuántas letras tiene cada palabra
+  // y si ya fue premiada.
+  let wordsInfo = {
+    1: { length: 4, name: 'SPAM', rewarded: false },
+    2: { length: 3, name: 'VPN', rewarded: false },
+    3: { length: 6, name: 'BACKUP', rewarded: false },
+    4: { length: 6, name: 'COOKIE', rewarded: false }
   };
 
   const attemptsLeft = document.getElementById('attemptsLeft');
@@ -252,51 +260,53 @@
   checkBtn.addEventListener('click', () => {
     const inputs = document.querySelectorAll('td input');
     let mismatch = false;
+
+    // Asumimos que todas las palabras están correctas, hasta comprobar lo contrario
     let wordCorrectness = {
-      SPAM: true,
-      VPN: true,
-      BACKUP: true,
-      COOKIE: true
+      1: true,
+      2: true,
+      3: true,
+      4: true
     };
 
     inputs.forEach(cell => {
       const expected = (cell.getAttribute('data-letter') || '').toUpperCase();
       const typed = (cell.value || '').toUpperCase();
-      const word = cell.getAttribute('data-word');
+      const wordId = cell.getAttribute('data-word'); // '1', '2', '3', '4'
 
-      // Si no hay letra esperada en la celda, la ignoramos
-      if (!expected) return;
+      if (!expected) return; // Celda sin letra esperada => ignorar
 
-      // Si no coincide, la palabra "word" no está completa
       if (typed !== expected) {
         mismatch = true;
-        if (word) {
-          wordCorrectness[word] = false;
+        if (wordId) {
+          wordCorrectness[wordId] = false;
         }
       }
     });
 
-    // Para cada palabra, si está 100% correcta y no fue premiada => sumamos 8 puntos
-    for (let w in wordCorrectness) {
-      if (wordCorrectness[w] && !rewardedWords[w]) {
+    // Revisa cuáles palabras se han completado
+    Object.keys(wordCorrectness).forEach(id => {
+      // Si está correcta y no fue premiada, +8 puntos
+      if (wordCorrectness[id] && !wordsInfo[id].rewarded) {
         score += 8;
-        rewardedWords[w] = true;
+        wordsInfo[id].rewarded = true;
       }
-    }
+    });
 
-    // Si hay errores, -1 intento
+    // Si hubo algún error en celdas, -1 intento
     if (mismatch) {
       attempts--;
       attemptsLeft.textContent = attempts;
       message.style.color = 'red';
-      message.textContent = `Tienes letras equivocadas. Te quedan ${attempts} intentos.`;
+      message.textContent = `Hay letras incorrectas. Te quedan ${attempts} intentos.`;
       if (attempts <= 0) {
         attempts = 0;
         checkBtn.disabled = true;
         checkBtn.style.opacity = '0.5';
-        message.textContent = '¡Game Over! No te quedan intentos.';
+        message.textContent = '¡Game Over! Sin intentos.';
       }
     } else {
+      // Sin errores
       message.style.color = 'green';
       message.textContent = '¡Perfecto! No encontraste errores.';
     }
@@ -305,18 +315,16 @@
   });
 
   resetBtn.addEventListener('click', () => {
-    // Reiniciar inputs
+    // Limpiamos todo
     const inputs = document.querySelectorAll('td input');
     inputs.forEach(cell => {
       cell.value = '';
     });
-
-    // Reiniciar intentos y score
     attempts = 5;
     score = 0;
-    for (let w in rewardedWords) {
-      rewardedWords[w] = false;
-    }
+    Object.keys(wordsInfo).forEach(id => {
+      wordsInfo[id].rewarded = false;
+    });
     attemptsLeft.textContent = attempts;
     scoreDisplay.textContent = score;
     message.textContent = '';
@@ -326,3 +334,4 @@
 </script>
 </body>
 </html>
+
