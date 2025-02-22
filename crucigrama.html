@@ -109,5 +109,110 @@
       position: absolute;
       top: 2px;
       left: 2px;
-      fon
+      font-size: 14px;
+      font-weight: bold;
+      color: #D32F2F;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 10px 20px;
+      margin: 20px 10px;
+      font-size: 16px;
+      border-radius: 8px;
+      color: #fff;
+      cursor: pointer;
+      border: none;
+      transition: background 0.3s ease;
+    }
+    .btn-check {
+      background-color: #3498db;
+    }
+    .btn-check:hover {
+      background-color: #2ecc71;
+    }
+    .btn-reset {
+      background-color: #e74c3c;
+    }
+    .btn-reset:hover {
+      background-color: #c0392b;
+    }
+
+    #message {
+      font-size: 18px;
+      font-weight: bold;
+      margin-top: 10px;
+      color: #D32F2F;
+      min-height: 30px;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <h1>Crucigrama: Ciberseguridad</h1>
+  <p>Completa las palabras a partir de sus definiciones. Cada palabra vale 8 puntos. ¡Tienes 5 intentos!</p>
+
+  <div class="clues">
+    <h2>Definiciones</h2>
+    <ol>
+      <li>Filtra correos no deseados (4 letras)</li>
+      <li>Red Privada Virtual (3 letras)</li>
+      <li>Copia de seguridad de datos (6 letras)</li>
+      <li>Archivo que guardan sitios con tu info (6 letras)</li>
+    </ol>
+  </div>
+
+  <div id="info">
+    Intentos restantes: <span id="attemptsLeft">5</span> |
+    Puntuación: <span id="scoreDisplay">0</span>
+  </div>
+
+  <div class="crossword-container">
+    <table>
+      <tr>
+        <td><span class="num-label">1</span><input data-letter="S" maxlength="1"></td>
+        <td><input data-letter="P" maxlength="1"></td>
+        <td><input data-letter="A" maxlength="1"></td>
+        <td><input data-letter="M" maxlength="1"></td>
+        <td class="empty"></td>
+      </tr>
+      <tr>
+        <td class="empty"></td>
+        <td class="empty"></td>
+        <td class="empty"></td>
+        <td class="empty"></td>
+        <td><span class="num-label">2</span><input data-letter="V" maxlength="1"></td>
+      </tr>
+      <tr>
+        <td><span class="num-label">3</span><input data-letter="B" maxlength="1"></td>
+        <td><input data-letter="A" maxlength="1"></td>
+        <td><input data-letter="C" maxlength="1"></td>
+        <td><input data-letter="K" maxlength="1"></td>
+        <td><input data-letter="U" maxlength="1"></td>
+        <td><input data-letter="P" maxlength="1"></td>
+      </tr>
+      <tr>
+        <td class="empty"></td>
+        <td class="empty"></td>
+        <td class="empty"></td>
+        <td class="empty"></td>
+        <td><input data-letter="N" maxlength="1"></td>
+      </tr>
+      <tr>
+        <td class="empty"></td>
+        <td><span class="num-label">4</span><input data-letter="C" maxlength="1"></td>
+        <td><input data-letter="O" maxlength="1"></td>
+        <td><input data-letter="O" maxlength="1"></td>
+        <td><input data-letter="K" maxlength="1"></td>
+        <td><input data-letter="I" maxlength="1"></td>
+        <td><input data-letter="E" maxlength="1"></td>
+      </tr>
+    </table>
+  </div>
+
+  <button class="btn btn-check" id="checkBtn">Verificar</button>
+  <button class="btn btn-reset" id="resetBtn">Reiniciar</button>
+</div>
+</body>
+</html>
 
