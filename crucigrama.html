@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Crucigrama Ciberseguridad (con Intentos y Puntos)</title>
+  <style>
+    body {
+      background: linear-gradient(135deg, #A0E7E5 0%, #FFCFDF 100%);
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      margin: 0; 
+      padding: 20px; 
+      text-align: center;
+    }
+    h1 {
+      color: #F57C00;
+      text-shadow: 1px 1px 2px #fff;
+    }
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      background: #fff;
+      border-radius: 15px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      padding: 20px;
+      text-align: center;
+    }
+
+    /* Sección de información (intentos y puntos) */
+    #info {
+      font-size: 18px;
+      margin-bottom: 10px;
+      color: #333;
+    }
+    #info span {
+      font-weight: bold;
+      color: #e74c3c; /* Color para intentos */
+    }
+    #scoreDisplay {
+      font-weight: bold;
+      color: #2ecc71; /* Verde para los puntos */
+    }
+
+    /* Tabla del crucigrama */
+    table {
+      margin: 15px auto;
+      border-collapse: collapse;
+    }
+    td {
+      width: 40px;
+      height: 40px;
+      border: 2px solid #FFB74D;
+      position: relative;
+      background-color: #FFF9C4;
+    }
+
+    /* Inputs de casilla */
+    td input {
+      width: 100%;
+      height: 100%;
+      border: none;
+      background: transparent;
+      text-align: center;
+      font-size: 20px;
+      text-transform: uppercase;
+      font-weight: bold;
+      cursor: pointer;
+      color: #444;
+    }
+    td input:focus {
+      outline: 2px solid #3498db; 
+    }
+
+    /* Celdas que no se usan */
+    .empty {
+      background: #ccc;
+      border: 2px solid #ccc;
+    }
+
+    /* Botones */
+    .btn {
+      display: inline-block;
+      padding: 10px 20px;
+      margin: 20px 10px;
+      font-size: 16px;
+      border-radius: 8px;
+      color: #fff;
+      cursor: pointer;
+      border: none;
+      transition: background 0.3s ease;
+    }
+    .btn-check {
+      background-color: #3498db; /* azul */
+    }
+    .btn-check:hover {
+      background-color: #2ecc71; /* verde */
+    }
+    .btn-reset {
+      background-color: #e74c3c; /* rojo */
+    }
+    .btn-reset:hover {
+      background-color: #c0392b; 
+    }
+
+    #message {
+      font-size: 18px;
+      font-weight: bold;
+      margin-top: 10px;
+      color: #D32F2F;
+      min-height: 30px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h1>Crucigrama: Ciberseguridad</h1>
+  <p>Encuentra las 4 palabras y obtén 8 puntos por cada una. ¡Tienes 5 intentos!</p>
+
+  <!-- Info de intentos y puntuación -->
+  <div id="info">
+    Intentos restantes: <span id="attemptsLeft">5</span> |
+    Puntuación: <span id="scoreDisplay">0</span>
+  </div>
+
+  <!-- Tabla del crucigrama (6 filas x 7 columnas, como ejemplo) -->
+  <table>
+    <!-- Fila 1 (SPAM, horizontal, col1-4) -->
+    <tr>
+      <td><input data-letter="S" data-word="SPAM" maxlength="1"></td>
+      <td><input data-letter="P" data-word="SPAM" maxlength="1"></td>
+      <td><input data-letter="A" data-word="SPAM" maxlength="1"></td>
+      <td><input data-letter="M" data-word="SPAM" maxlength="1"></td>
+      <td class="empty"></td>
+      <td><input maxlength="1"></td>
+      <td><input maxlength="1"></td>
+    </tr>
+
+    <!-- Fila 2 (VPN vertical col6 => fila2-4) -->
+    <tr>
+      <td class="empty"></td>
+      <td class="empty"></td>
+      <td class="empty"></td>
+      <td class="empty"></td>
+      <td class="empty"></td>
+      <td><input data-letter="V" data-word="VPN" maxlength="1"></td>
+      <td><input data-letter="P" maxlength="1"></td>
+    </tr>
+
+    <!-- Fila 3 (BACKUP horizontal col1-6) + N de VPN en col6 fila4? Lo haremos abajo. -->
+    <tr>
+      <td><input data-letter="B" data-word="BACKUP" maxlength="1"></td>
+      <td><input data-letter="A" data-word="BACKUP" maxlength="1"></td>
+      <td><input data-letter="C" data-word="BACKUP" maxlength="1"></td>
+      <td><input data-letter="K" data-word="BACKUP" maxlength="1"></td>
+      <td><input data-letter="U" data-word="BACKUP" maxlength="1"></td>
+      <td><input data-letter="P" data-word="BACKUP" maxlength="1"></td>
+      <td class="empty"></td>
+    </tr>
+
+    <!-- Fila 4 (N de VPN, col6) -->
+    <tr>
+      <td class="empty"></td>
+      <td class="empty"></td>
+      <td class="empty"></td>
+      <td class="empty"></td>
+      <td class="empty"></td>
+      <td><input data-letter="N" data-word="VPN" maxlength="1"></td>
+      <td class="empty"></td>
+    </tr>
+
+    <!-- Fila 5 (COOKIE horizontal col2-7) -->
+    <tr>
+      <td class="empty"></td>
+      <td><input data-letter="C" data-word="COOKIE" maxlength="1"></td>
+      <td><input data-letter="O" data-word="COOKIE" maxlength="1"></td>
+      <td><input data-letter="O" data-word="COOKIE" maxlength="1"></td>
+      <td><input data-letter="K" data-word="COOKIE" maxlength="1"></td>
+      <td><input data-letter="I" data-word="COOKIE" maxlength="1"></td>
+      <td><input data-letter="E" data-word="COOKIE" maxlength="1"></td>
+    </tr>
+
+    <!-- Fila 6 (vacía) -->
+    <tr>
+      <td class="empty"></td>
+      <td class="empty"></td>
+      <td class="empty"></td>
+      <td class="empty"></td>
+      <td class="empty"></td>
+      <td class="empty"></td>
+      <td class="empty"></td>
+    </tr>
+  </table>
+
+  <button class="btn btn-check" id="checkBtn">Verificar</button>
+  <button class="btn btn-reset" id="resetBtn">Reiniciar</button>
+
+  <div id="message"></div>
+</div>
+
+<script>
+  // Variables globales
+  let attempts = 5;
+  let score = 0;
+
+  // Para saber si ya premiamos (8 puntos) a cada palabra
+  let rewardedWords = {
+    SPAM: false,
+    VPN: false,
+    BACKUP: false,
+    COOKIE: false
+  };
+
+  const attemptsLeft = document.getElementById('attemptsLeft');
+  const scoreDisplay = document.getElementById('scoreDisplay');
+  const message = document.getElementById('message');
+  const checkBtn = document.getElementById('checkBtn');
+  const resetBtn = document.getElementById('resetBtn');
+
+  // Escucha del botón Verificar
+  checkBtn.addEventListener('click', () => {
+    // Primero revisamos cada casilla
+    const inputs = document.querySelectorAll('td input');
+    let mismatch = false; // Indica si hay algún error
+    let wordCorrectness = {
+      SPAM: true,
+      VPN: true,
+      BACKUP: true,
+      COOKIE: true
+    };
+
+    inputs.forEach(cell => {
+      const expected = (cell.getAttribute('data-letter') || '').toUpperCase();
+      const typed = (cell.value || '').toUpperCase();
+      const word = cell.getAttribute('data-word');
+
+      // Si la celda no participa en ninguna palabra, no la penalizamos
+      if (!expected) {
+        return;
+      }
+      // Si typed !== expected => esa palabra no está completa/correcta
+      if (typed !== expected) {
+        mismatch = true;
+        if (word) {
+          wordCorrectness[word] = false;
+        }
+      }
+    });
+
+    // Otorgamos puntos a las palabras que estén completamente correctas
+    for (let w in wordCorrectness) {
+      if (wordCorrectness[w] && !rewardedWords[w]) {
+        // Palabra w está completa y no la habíamos premiado
+        score += 8;  // Sube 8 puntos
+        rewardedWords[w] = true;
+      }
+    }
+
+    // Si hay algún error, intentos--
+    if (mismatch) {
+      attempts--;
+      attemptsLeft.textContent = attempts;
+      message.style.color = 'red';
+      message.textContent = `Quedan ${attempts} intentos. Revisa las letras rojas o faltantes.`;
+      if (attempts <= 0) {
+        // Se acabaron intentos
+        attempts = 0;
+        checkBtn.disabled = true;
+        checkBtn.style.opacity = '0.5';
+        message.textContent = '¡Game Over! Te quedaste sin intentos.';
+      }
+    } else {
+      // Sin errores => quizás subieron puntos, y no se descuenta intento
+      message.style.color = 'green';
+      message.textContent = '¡Perfecto! No encontraste errores esta vez.';
+    }
+
+    // Actualizamos la puntuación en pantalla
+    scoreDisplay.textContent = score;
+  });
+
+  // Escucha del botón Reiniciar
+  resetBtn.addEventListener('click', () => {
+    // Limpiamos inputs, restauramos intentos y puntuación
+    const inputs = document.querySelectorAll('td input');
+    inputs.forEach(cell => {
+      cell.value = '';
+    });
+    attempts = 5;
+    score = 0;
+    for (let w in rewardedWords) {
+      rewardedWords[w] = false;
+    }
+    attemptsLeft.textContent = attempts;
+    scoreDisplay.textContent = score;
+    message.textContent = '';
+    checkBtn.disabled = false;
+    checkBtn.style.opacity = '1';
+  });
+</script>
+
+</body>
+</html>
