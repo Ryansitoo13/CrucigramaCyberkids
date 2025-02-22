@@ -55,7 +55,6 @@
       border: 2px solid #FFB74D; 
       background-color: #FFF9C4; 
       position: relative;
-      text-align: center;
     }
     td input {
       width: 100%;
@@ -89,45 +88,59 @@
       transition: background 0.3s ease;
     }
     .btn-check {
-      background-color: green;
+      background-color: #28a745;
+    }
+    .btn-check:hover {
+      background-color: #218838;
     }
     .btn-reset {
-      background-color: red;
+      background-color: #dc3545;
     }
-    .correct {
-      background-color: #2ecc71 !important;
+    .btn-reset:hover {
+      background-color: #c82333;
     }
-    .incorrect {
-      background-color: #e74c3c !important;
+    .message {
+      margin-top: 20px;
+      font-size: 18px;
+      font-weight: bold;
     }
   </style>
   <script>
     document.addEventListener("DOMContentLoaded", function () {
-      const respuestas = {
-        1: "SPAM",
-        2: "VPN",
-        3: "BACKUP",
-        4: "COOKIE",
-        5: "ANTIVIRUS",
-        6: "FIREWALL"
+      const correctAnswers = {
+        "1": "SPAM",
+        "2": "VPN",
+        "3": "BACKUP",
+        "4": "COOKIE",
+        "5": "ANTIVIRUS",
+        "6": "FIREWALL"
       };
       
       document.getElementById("checkBtn").addEventListener("click", function () {
-        let puntuacion = 0;
-        Object.keys(respuestas).forEach(num => {
-          let inputs = document.querySelectorAll(`[data-num='${num}']`);
-          let respuestaUsuario = Array.from(inputs).map(input => input.value.toUpperCase()).join('');
+        let score = 0;
+        let allCorrect = true;
+
+        Object.keys(correctAnswers).forEach((key) => {
+          let inputs = document.querySelectorAll(`td[data-word='${key}'] input`);
+          let userAnswer = "";
+          inputs.forEach((input) => {
+            userAnswer += input.value.toUpperCase();
+          });
           
-          if (respuestaUsuario === respuestas[num]) {
-            inputs.forEach(input => input.classList.add("correct"));
-            puntuacion += 8;
+          if (userAnswer === correctAnswers[key]) {
+            inputs.forEach(input => input.style.backgroundColor = "#A5D6A7");
+            score += 8;
           } else {
-            inputs.forEach(input => input.classList.add("incorrect"));
+            inputs.forEach(input => input.style.backgroundColor = "#EF9A9A");
+            allCorrect = false;
           }
         });
-        document.getElementById("resultado").innerHTML = `Puntuación: ${puntuacion}. ${puntuacion > 0 ? '¡Bien hecho!' : 'Revisa las respuestas incorrectas.'}`;
+
+        let messageDiv = document.getElementById("message");
+        messageDiv.textContent = allCorrect ? `¡Correcto! Puntuación: ${score}` : `Puntuación: ${score}. Revisa las respuestas incorrectas.`;
+        messageDiv.style.color = allCorrect ? "green" : "red";
       });
-      
+
       document.getElementById("resetBtn").addEventListener("click", function () {
         location.reload();
       });
@@ -149,22 +162,7 @@
     </ol>
     <button class="btn btn-check" id="checkBtn">Verificar</button>
     <button class="btn btn-reset" id="resetBtn">Reiniciar</button>
-    <p id="resultado"></p>
-  </div>
-  <div class="crossword-container">
-    <table>
-      <tr>
-        <td><span class="num-label">1</span><input data-num="1" maxlength="1"></td>
-        <td><input data-num="1" maxlength="1"></td>
-        <td><input data-num="1" maxlength="1"></td>
-        <td><input data-num="1" maxlength="1"></td>
-      </tr>
-      <tr>
-        <td><span class="num-label">2</span><input data-num="2" maxlength="1"></td>
-        <td><input data-num="2" maxlength="1"></td>
-        <td><input data-num="2" maxlength="1"></td>
-      </tr>
-    </table>
+    <div id="message" class="message"></div>
   </div>
 </div>
 </body>
