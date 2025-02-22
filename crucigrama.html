@@ -68,12 +68,6 @@
       color: #444;
       cursor: pointer;
     }
-    .correct {
-      background-color: lightgreen !important;
-    }
-    .incorrect {
-      background-color: lightcoral !important;
-    }
     .num-label {
       position: absolute;
       top: 2px;
@@ -105,50 +99,35 @@
     .btn-reset:hover {
       background-color: #c0392b;
     }
-    #message {
-      font-size: 18px;
-      font-weight: bold;
-      margin-top: 10px;
-      text-align: center;
-    }
   </style>
   <script>
     document.addEventListener("DOMContentLoaded", function () {
-      const correctAnswers = ["SPAM", "VPN", "BACKUP", "COOKIE", "ANTIVIRUS", "FIREWALL"];
-      const inputs = document.querySelectorAll("td input");
-      const messageDiv = document.getElementById("message");
-      let score = 0;
+      const respuestas = {
+        1: "SPAM",
+        2: "VPN",
+        3: "BACKUP",
+        4: "COOKIE",
+        5: "ANTIVIRUS",
+        6: "FIREWALL"
+      };
       
       document.getElementById("checkBtn").addEventListener("click", function () {
-        let userAnswers = [];
-        let correctCount = 0;
-        
-        inputs.forEach((input, index) => {
-          let row = Math.floor(index / 10);
-          if (!userAnswers[row]) userAnswers[row] = "";
-          userAnswers[row] += input.value.toUpperCase();
-        });
-        
-        userAnswers.forEach((answer, index) => {
-          let cells = document.querySelectorAll(`tr:nth-child(${index + 1}) td input`);
-          if (answer === correctAnswers[index]) {
-            correctCount++;
-            cells.forEach(cell => cell.classList.add("correct"));
+        let puntaje = 0;
+        Object.keys(respuestas).forEach(num => {
+          let inputs = document.querySelectorAll(`td[data-num='${num}'] input`);
+          let respuestaUsuario = Array.from(inputs).map(input => input.value.toUpperCase()).join('');
+          if (respuestaUsuario === respuestas[num]) {
+            inputs.forEach(input => input.style.backgroundColor = "#2ecc71");
+            puntaje += 8;
           } else {
-            cells.forEach(cell => cell.classList.add("incorrect"));
+            inputs.forEach(input => input.style.backgroundColor = "#e74c3c");
           }
         });
-        
-        score = correctCount * 8;
-        messageDiv.innerHTML = `Puntuación: ${score}. ` + (correctCount === correctAnswers.length ? "¡Bien hecho!" : "Revisa las respuestas incorrectas.");
+        document.getElementById("scoreDisplay").textContent = `Puntuación: ${puntaje}. Revise las respuestas incorrectas.`;
       });
       
       document.getElementById("resetBtn").addEventListener("click", function () {
-        inputs.forEach(input => {
-          input.value = "";
-          input.classList.remove("correct", "incorrect");
-        });
-        messageDiv.innerHTML = "";
+        location.reload();
       });
     });
   </script>
@@ -168,18 +147,32 @@
     </ol>
     <button class="btn btn-check" id="checkBtn">Verificar</button>
     <button class="btn btn-reset" id="resetBtn">Reiniciar</button>
-    <div id="message"></div>
+    <p id="scoreDisplay"></p>
   </div>
   <div class="crossword-container">
     <table>
       <tr>
-        <td><span class="num-label">1</span><input maxlength="1"></td>
+        <td data-num="1"><span class="num-label">1</span><input maxlength="1"></td>
         <td><input maxlength="1"></td>
         <td><input maxlength="1"></td>
         <td><input maxlength="1"></td>
       </tr>
       <tr>
-        <td><span class="num-label">2</span><input maxlength="1"></td>
+        <td data-num="2"><span class="num-label">2</span><input maxlength="1"></td>
+        <td><input maxlength="1"></td>
+        <td><input maxlength="1"></td>
+      </tr>
+      <tr>
+        <td data-num="3"><span class="num-label">3</span><input maxlength="1"></td>
+        <td><input maxlength="1"></td>
+        <td><input maxlength="1"></td>
+        <td><input maxlength="1"></td>
+        <td><input maxlength="1"></td>
+        <td><input maxlength="1"></td>
+      </tr>
+      <tr>
+        <td data-num="4"><span class="num-label">4</span><input maxlength="1"></td>
+        <td><input maxlength="1"></td>
         <td><input maxlength="1"></td>
         <td><input maxlength="1"></td>
       </tr>
@@ -188,3 +181,4 @@
 </div>
 </body>
 </html>
+
