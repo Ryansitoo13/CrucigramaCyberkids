@@ -1,31 +1,45 @@
 document.addEventListener("DOMContentLoaded", function () {
-    const respuestas = ["SPAM", "VPN", "BACKUP", "COOKIE", "ANTIVIRUS", "FIREWALL"];
-    const inputs = document.querySelectorAll("td input");
-    const checkBtn = document.getElementById("checkBtn");
-    const resetBtn = document.getElementById("resetBtn");
-    const feedback = document.getElementById("feedback");
+    const crossword = [
+        "SPAM",
+        "VPN",
+        "BACKUP",
+        "COOKIE",
+        "ANTIVIRUS",
+        "FIREWALL"
+    ];
 
-    checkBtn.addEventListener("click", function () {
-        let score = 0;
-        let index = 0;
-        inputs.forEach((input, i) => {
-            let expected = respuestas[index][i % respuestas[index].length];
-            if (input.value.toUpperCase() === expected) {
-                input.style.backgroundColor = "lightgreen";
-                score += 8;
+    let attempts = 5;
+    let score = 0;
+
+    document.getElementById("checkBtn").addEventListener("click", function () {
+        let correctAnswers = 0;
+        let inputs = document.querySelectorAll("td input");
+
+        inputs.forEach((input, index) => {
+            let row = Math.floor(index / 6);
+            if (input.value.toUpperCase() === crossword[row][index % crossword[row].length]) {
+                input.classList.add("correct");
+                input.classList.remove("incorrect");
+                correctAnswers++;
             } else {
-                input.style.backgroundColor = "salmon";
+                input.classList.add("incorrect");
+                input.classList.remove("correct");
             }
-            if ((i + 1) % respuestas[index].length === 0) index++;
         });
-        feedback.innerHTML = `Puntuación: ${score}. Revisa las respuestas incorrectas.`;
+
+        if (correctAnswers === inputs.length) {
+            score += 8;
+        }
+
+        attempts--;
+        document.getElementById("attempts").innerText = attempts;
+
+        if (attempts <= 0) {
+            document.getElementById("checkBtn").disabled = true;
+        }
     });
 
-    resetBtn.addEventListener("click", function () {
-        inputs.forEach(input => {
-            input.value = "";
-            input.style.backgroundColor = "";
-        });
-        feedback.innerHTML = "";
+    document.getElementById("resetBtn").addEventListener("click", function () {
+        location.reload();
     });
 });
