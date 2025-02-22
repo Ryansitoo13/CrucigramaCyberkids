@@ -102,9 +102,33 @@
   </style>
   <script>
     document.addEventListener("DOMContentLoaded", function () {
+      const answers = ["SPAM", "VPN", "BACKUP", "COOKIE", "ANTIVIRUS", "FIREWALL"];
+      const inputs = document.querySelectorAll("td input");
+      
       document.getElementById("checkBtn").addEventListener("click", function () {
-        alert("Verificación en proceso...");
+        let correct = true;
+        let index = 0;
+        
+        for (let i = 0; i < answers.length; i++) {
+          let answer = answers[i];
+          for (let j = 0; j < answer.length; j++) {
+            if (inputs[index] && inputs[index].value.toUpperCase() !== answer[j]) {
+              correct = false;
+              inputs[index].style.backgroundColor = "#FFCCCC";
+            } else if (inputs[index]) {
+              inputs[index].style.backgroundColor = "#CCFFCC";
+            }
+            index++;
+          }
+        }
+        
+        if (correct) {
+          alert("¡Felicidades! Has completado correctamente el crucigrama.");
+        } else {
+          alert("Algunas respuestas son incorrectas, revisa los cuadros en rojo.");
+        }
       });
+      
       document.getElementById("resetBtn").addEventListener("click", function () {
         location.reload();
       });
@@ -150,26 +174,6 @@
       </tr>
       <tr>
         <td><span class="num-label">4</span><input maxlength="1"></td>
-        <td><input maxlength="1"></td>
-        <td><input maxlength="1"></td>
-        <td><input maxlength="1"></td>
-      </tr>
-      <tr>
-        <td><span class="num-label">5</span><input maxlength="1"></td>
-        <td><input maxlength="1"></td>
-        <td><input maxlength="1"></td>
-        <td><input maxlength="1"></td>
-        <td><input maxlength="1"></td>
-        <td><input maxlength="1"></td>
-        <td><input maxlength="1"></td>
-        <td><input maxlength="1"></td>
-        <td><input maxlength="1"></td>
-      </tr>
-      <tr>
-        <td><span class="num-label">6</span><input maxlength="1"></td>
-        <td><input maxlength="1"></td>
-        <td><input maxlength="1"></td>
-        <td><input maxlength="1"></td>
         <td><input maxlength="1"></td>
         <td><input maxlength="1"></td>
         <td><input maxlength="1"></td>
