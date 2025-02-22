@@ -102,30 +102,9 @@
   </style>
   <script>
     document.addEventListener("DOMContentLoaded", function () {
-      const respuestas = {
-        1: "SPAM",
-        2: "VPN",
-        3: "BACKUP",
-        4: "COOKIE",
-        5: "ANTIVIRUS",
-        6: "FIREWALL"
-      };
-      
       document.getElementById("checkBtn").addEventListener("click", function () {
-        let puntaje = 0;
-        Object.keys(respuestas).forEach(num => {
-          let inputs = document.querySelectorAll(`td[data-num='${num}'] input`);
-          let respuestaUsuario = Array.from(inputs).map(input => input.value.toUpperCase()).join('');
-          if (respuestaUsuario === respuestas[num]) {
-            inputs.forEach(input => input.style.backgroundColor = "#2ecc71");
-            puntaje += 8;
-          } else {
-            inputs.forEach(input => input.style.backgroundColor = "#e74c3c");
-          }
-        });
-        document.getElementById("scoreDisplay").textContent = `Puntuación: ${puntaje}. Revise las respuestas incorrectas.`;
+        alert("Verificación en proceso...");
       });
-      
       document.getElementById("resetBtn").addEventListener("click", function () {
         location.reload();
       });
@@ -147,23 +126,22 @@
     </ol>
     <button class="btn btn-check" id="checkBtn">Verificar</button>
     <button class="btn btn-reset" id="resetBtn">Reiniciar</button>
-    <p id="scoreDisplay"></p>
   </div>
   <div class="crossword-container">
     <table>
       <tr>
-        <td data-num="1"><span class="num-label">1</span><input maxlength="1"></td>
+        <td><span class="num-label">1</span><input maxlength="1"></td>
         <td><input maxlength="1"></td>
         <td><input maxlength="1"></td>
         <td><input maxlength="1"></td>
       </tr>
       <tr>
-        <td data-num="2"><span class="num-label">2</span><input maxlength="1"></td>
+        <td><span class="num-label">2</span><input maxlength="1"></td>
         <td><input maxlength="1"></td>
         <td><input maxlength="1"></td>
       </tr>
       <tr>
-        <td data-num="3"><span class="num-label">3</span><input maxlength="1"></td>
+        <td><span class="num-label">3</span><input maxlength="1"></td>
         <td><input maxlength="1"></td>
         <td><input maxlength="1"></td>
         <td><input maxlength="1"></td>
@@ -171,7 +149,29 @@
         <td><input maxlength="1"></td>
       </tr>
       <tr>
-        <td data-num="4"><span class="num-label">4</span><input maxlength="1"></td>
+        <td><span class="num-label">4</span><input maxlength="1"></td>
+        <td><input maxlength="1"></td>
+        <td><input maxlength="1"></td>
+        <td><input maxlength="1"></td>
+        <td><input maxlength="1"></td>
+        <td><input maxlength="1"></td>
+      </tr>
+      <tr>
+        <td><span class="num-label">5</span><input maxlength="1"></td>
+        <td><input maxlength="1"></td>
+        <td><input maxlength="1"></td>
+        <td><input maxlength="1"></td>
+        <td><input maxlength="1"></td>
+        <td><input maxlength="1"></td>
+        <td><input maxlength="1"></td>
+        <td><input maxlength="1"></td>
+        <td><input maxlength="1"></td>
+      </tr>
+      <tr>
+        <td><span class="num-label">6</span><input maxlength="1"></td>
+        <td><input maxlength="1"></td>
+        <td><input maxlength="1"></td>
+        <td><input maxlength="1"></td>
         <td><input maxlength="1"></td>
         <td><input maxlength="1"></td>
         <td><input maxlength="1"></td>
@@ -181,4 +181,5 @@
 </div>
 </body>
 </html>
+
 
