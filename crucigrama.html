@@ -106,50 +106,6 @@
       text-align: center;
     }
   </style>
-  <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      const answers = ["SPAM", "VPN", "BACKUP", "COOKIE", "ANTIVIRUS", "FIREWALL"];
-      const inputs = document.querySelectorAll("td input");
-      const message = document.getElementById("message");
-      let score = 0;
-      
-      document.getElementById("checkBtn").addEventListener("click", function () {
-        let correct = true;
-        let index = 0;
-        
-        for (let i = 0; i < answers.length; i++) {
-          let answer = answers[i];
-          let wordCorrect = true;
-          
-          for (let j = 0; j < answer.length; j++) {
-            if (inputs[index] && inputs[index].value.toUpperCase() !== answer[j]) {
-              wordCorrect = false;
-              inputs[index].style.backgroundColor = "#FFCCCC";
-            } else if (inputs[index]) {
-              inputs[index].style.backgroundColor = "#CCFFCC";
-            }
-            index++;
-          }
-          
-          if (wordCorrect) {
-            score += 8;
-          }
-        }
-        
-        if (score === 48) {
-          message.style.color = "green";
-          message.textContent = `¡Felicidades! Has completado correctamente el crucigrama con ${score} puntos.`;
-        } else {
-          message.style.color = "red";
-          message.textContent = `Algunas respuestas son incorrectas, revisa los cuadros en rojo. Puntos actuales: ${score}.`;
-        }
-      });
-      
-      document.getElementById("resetBtn").addEventListener("click", function () {
-        location.reload();
-      });
-    });
-  </script>
 </head>
 <body>
 <h1>Crucigrama: Ciberseguridad</h1>
@@ -189,12 +145,36 @@
         <td><input maxlength="1"></td>
         <td><input maxlength="1"></td>
       </tr>
+      <tr>
+        <td><span class="num-label">4</span><input maxlength="1"></td>
+        <td><input maxlength="1"></td>
+        <td><input maxlength="1"></td>
+        <td><input maxlength="1"></td>
+        <td><input maxlength="1"></td>
+        <td><input maxlength="1"></td>
+      </tr>
+      <tr>
+        <td><span class="num-label">5</span><input maxlength="1"></td>
+        <td><input maxlength="1"></td>
+        <td><input maxlength="1"></td>
+        <td><input maxlength="1"></td>
+        <td><input maxlength="1"></td>
+        <td><input maxlength="1"></td>
+        <td><input maxlength="1"></td>
+        <td><input maxlength="1"></td>
+        <td><input maxlength="1"></td>
+      </tr>
+      <tr>
+        <td><span class="num-label">6</span><input maxlength="1"></td>
+        <td><input maxlength="1"></td>
+        <td><input maxlength="1"></td>
+        <td><input maxlength="1"></td>
+        <td><input maxlength="1"></td>
+        <td><input maxlength="1"></td>
+        <td><input maxlength="1"></td>
+      </tr>
     </table>
   </div>
-</div>
-</body>
-</html>
-
 </div>
 </body>
 </html>
