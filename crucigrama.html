@@ -68,6 +68,12 @@
       color: #444;
       cursor: pointer;
     }
+    .correct {
+      background-color: lightgreen !important;
+    }
+    .incorrect {
+      background-color: lightcoral !important;
+    }
     .num-label {
       position: absolute;
       top: 2px;
@@ -106,6 +112,46 @@
       text-align: center;
     }
   </style>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const correctAnswers = ["SPAM", "VPN", "BACKUP", "COOKIE", "ANTIVIRUS", "FIREWALL"];
+      const inputs = document.querySelectorAll("td input");
+      const messageDiv = document.getElementById("message");
+      let score = 0;
+      
+      document.getElementById("checkBtn").addEventListener("click", function () {
+        let userAnswers = [];
+        let correctCount = 0;
+        
+        inputs.forEach((input, index) => {
+          let row = Math.floor(index / 10);
+          if (!userAnswers[row]) userAnswers[row] = "";
+          userAnswers[row] += input.value.toUpperCase();
+        });
+        
+        userAnswers.forEach((answer, index) => {
+          let cells = document.querySelectorAll(`tr:nth-child(${index + 1}) td input`);
+          if (answer === correctAnswers[index]) {
+            correctCount++;
+            cells.forEach(cell => cell.classList.add("correct"));
+          } else {
+            cells.forEach(cell => cell.classList.add("incorrect"));
+          }
+        });
+        
+        score = correctCount * 8;
+        messageDiv.innerHTML = `Puntuación: ${score}. ` + (correctCount === correctAnswers.length ? "¡Bien hecho!" : "Revisa las respuestas incorrectas.");
+      });
+      
+      document.getElementById("resetBtn").addEventListener("click", function () {
+        inputs.forEach(input => {
+          input.value = "";
+          input.classList.remove("correct", "incorrect");
+        });
+        messageDiv.innerHTML = "";
+      });
+    });
+  </script>
 </head>
 <body>
 <h1>Crucigrama: Ciberseguridad</h1>
@@ -128,47 +174,6 @@
     <table>
       <tr>
         <td><span class="num-label">1</span><input maxlength="1"></td>
-        <td><input maxlength="1"></td>
-        <td><input maxlength="1"></td>
-        <td><input maxlength="1"></td>
-      </tr>
-      <tr>
-        <td><span class="num-label">2</span><input maxlength="1"></td>
-        <td><input maxlength="1"></td>
-        <td><input maxlength="1"></td>
-      </tr>
-      <tr>
-        <td><span class="num-label">3</span><input maxlength="1"></td>
-        <td><input maxlength="1"></td>
-        <td><input maxlength="1"></td>
-        <td><input maxlength="1"></td>
-        <td><input maxlength="1"></td>
-        <td><input maxlength="1"></td>
-      </tr>
-      <tr>
-        <td><span class="num-label">4</span><input maxlength="1"></td>
-        <td><input maxlength="1"></td>
-        <td><input maxlength="1"></td>
-        <td><input maxlength="1"></td>
-        <td><input maxlength="1"></td>
-        <td><input maxlength="1"></td>
-      </tr>
-      <tr>
-        <td><span class="num-label">5</span><input maxlength="1"></td>
-        <td><input maxlength="1"></td>
-        <td><input maxlength="1"></td>
-        <td><input maxlength="1"></td>
-        <td><input maxlength="1"></td>
-        <td><input maxlength="1"></td>
-        <td><input maxlength="1"></td>
-        <td><input maxlength="1"></td>
-        <td><input maxlength="1"></td>
-      </tr>
-      <tr>
-        <td><span class="num-label">6</span><input maxlength="1"></td>
-        <td><input maxlength="1"></td>
-        <td><input maxlength="1"></td>
-        <td><input maxlength="1"></td>
         <td><input maxlength="1"></td>
         <td><input maxlength="1"></td>
         <td><input maxlength="1"></td>
