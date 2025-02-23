@@ -6,6 +6,15 @@ body {
     padding: 20px;
 }
 
+h1 {
+    font-size: 36px;
+    font-weight: bold;
+    text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
+    background: linear-gradient(to right, blue, green, red);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
 .container {
     max-width: 600px;
     margin: auto;
@@ -49,24 +58,23 @@ button {
     font-size: 18px;
     cursor: pointer;
     border: 2px solid transparent;
-    background-color: white; /* Color de fondo normal */
+    background-color: white;
     color: black;
     transition: background 0.3s, transform 0.2s;
 }
 
-/* 🔥 Efecto cuando pasas el mouse por encima */
+/* Efecto cuando pasas el mouse por encima */
 .option-btn:hover {
-    background-color: #ffcc00; /* Amarillo oscuro cuando pasas el cursor */
-    transform: scale(1.05); /* Pequeño aumento para hacer más atractivo */
+    background-color: #ffcc00;
+    transform: scale(1.05);
 }
 
-/* 🔹 Efecto cuando una opción es seleccionada */
+/* Efecto cuando una opción es seleccionada */
 .option-btn.selected {
-    background-color: #ff9900; /* Un naranja más oscuro cuando se selecciona */
+    background-color: #ff9900;
     border-color: black;
 }
 
-/* Oculta los elementos que no se deben mostrar al inicio */
 .hidden {
     display: none;
 }
