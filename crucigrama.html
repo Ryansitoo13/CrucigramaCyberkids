@@ -13,16 +13,91 @@
         <div id="start-screen">
             <p>Presiona "Empezar" para iniciar</p>
             <button id="startBtn">Empezar</button>
+        </div>
+        <div id="quiz-screen" class="hidden">
+            <h2 id="question-text"></h2>
+            <div id="options"></div>
+            <button id="verifyBtn" class="hidden">Verificar</button>
+            <p id="feedback"></p>
+            <p id="score">Puntos: 0</p>
             <button id="resetBtn">Reiniciar</button>
         </div>
-        
-        <div id="quiz-container" class="hidden">
-            <h2 id="question"></h2>
-            <div id="options"></div>
-            <button id="checkBtn" class="hidden">Verificar</button>
-            <p id="feedback"></p>
-        </div>
     </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            let questions = [
+                { question: "Filtra correos no deseados", correct: "Spam", options: ["Firewall", "VPN", "Antivirus", "Spam"] },
+                { question: "Red Privada Virtual", correct: "VPN", options: ["Firewall", "VPN", "Antivirus", "Spam"] },
+                { question: "Copia de seguridad de datos", correct: "Backup", options: ["Cifrado", "Backup", "Malware", "Phishing"] }
+            ];
+            let currentQuestionIndex = 0;
+            let score = 0;
+
+            const startBtn = document.getElementById("startBtn");
+            const quizScreen = document.getElementById("quiz-screen");
+            const startScreen = document.getElementById("start-screen");
+            const questionText = document.getElementById("question-text");
+            const optionsDiv = document.getElementById("options");
+            const verifyBtn = document.getElementById("verifyBtn");
+            const feedback = document.getElementById("feedback");
+            const scoreDisplay = document.getElementById("score");
+            const resetBtn = document.getElementById("resetBtn");
+            let selectedAnswer = "";
+
+            startBtn.addEventListener("click", function() {
+                startScreen.classList.add("hidden");
+                quizScreen.classList.remove("hidden");
+                loadQuestion();
+            });
+
+            function loadQuestion() {
+                let question = questions[currentQuestionIndex];
+                questionText.innerText = question.question;
+                optionsDiv.innerHTML = "";
+                question.options.forEach(option => {
+                    let button = document.createElement("button");
+                    button.innerText = option;
+                    button.classList.add("option-btn");
+                    button.addEventListener("click", function() {
+                        document.querySelectorAll(".option-btn").forEach(btn => btn.classList.remove("selected"));
+                        button.classList.add("selected");
+                        selectedAnswer = option;
+                        verifyBtn.classList.remove("hidden");
+                    });
+                    optionsDiv.appendChild(button);
+                });
+            }
+
+            verifyBtn.addEventListener("click", function() {
+                let question = questions[currentQuestionIndex];
+                if (selectedAnswer === question.correct) {
+                    feedback.innerText = "Correcto";
+                    feedback.style.color = "green";
+                    score += 8;
+                } else {
+                    feedback.innerText = "Incorrecto";
+                    feedback.style.color = "red";
+                }
+                scoreDisplay.innerText = `Puntos: ${score}`;
+                currentQuestionIndex++;
+                if (currentQuestionIndex < questions.length) {
+                    setTimeout(loadQuestion, 1000);
+                } else {
+                    feedback.innerText = `Juego terminado. Puntos finales: ${score}`;
+                    verifyBtn.classList.add("hidden");
+                }
+            });
+
+            resetBtn.addEventListener("click", function() {
+                currentQuestionIndex = 0;
+                score = 0;
+                scoreDisplay.innerText = "Puntos: 0";
+                feedback.innerText = "";
+                loadQuestion();
+            });
+        });
+    </script>
 </body>
 </html>
+
 
