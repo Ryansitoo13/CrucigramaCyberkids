@@ -3,22 +3,68 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trivia Ciberseguridad</title>
+    <title>Trivia: Ciberseguridad</title>
     <link rel="stylesheet" href="colors.css">
     <script defer src="cruci.js"></script>
+    <style>
+        body {
+            background: linear-gradient(135deg, #b2ebf2 0%, #ffe0b2 100%);
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+        }
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            background: #fff;
+            border-radius: 15px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            padding: 20px;
+            text-align: center;
+        }
+        .question-container {
+            display: none;
+        }
+        button {
+            padding: 10px 15px;
+            margin: 10px;
+            border-radius: 5px;
+            border: none;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        #startBtn { background: blue; color: white; }
+        #checkBtn { background: green; color: white; }
+        #resetBtn { background: red; color: white; }
+        .options button {
+            display: block;
+            width: 100%;
+            margin: 5px 0;
+        }
+    </style>
 </head>
 <body>
     <h1>Trivia: Ciberseguridad</h1>
     <div class="container">
-        <div class="trivia-box">
-            <h2>Cada respuesta correcta vale 8 puntos. ¡Tienes 5 intentos!</h2>
-            <div id="questions"></div>
+        <div id="start-container">
+            <p>Bienvenido a la trivia de ciberseguridad. ¡Presiona empezar para jugar!</p>
+            <button id="startBtn">Empezar</button>
+        </div>
+        
+        <div id="question-container" class="question-container">
+            <p id="question-text"></p>
+            <div class="options">
+                <button class="option" data-value="0"></button>
+                <button class="option" data-value="1"></button>
+                <button class="option" data-value="2"></button>
+                <button class="option" data-value="3"></button>
+            </div>
+            <p id="feedback"></p>
             <button id="checkBtn">Verificar</button>
             <button id="resetBtn">Reiniciar</button>
-            <p id="feedback"></p>
         </div>
     </div>
 </body>
 </html>
-
 
