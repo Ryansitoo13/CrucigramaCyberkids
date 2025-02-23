@@ -6,130 +6,21 @@
     <title>Trivia: Ciberseguridad</title>
     <link rel="stylesheet" href="colors.css">
     <script defer src="cruci.js"></script>
-    <style>
-        body {
-            background: linear-gradient(135deg, #b2ebf2 0%, #ffe0b2 100%);
-            font-family: 'Comic Sans MS', cursive, sans-serif;
-            margin: 0;
-            padding: 20px;
-            text-align: center;
-        }
-        .container {
-            max-width: 600px;
-            margin: 50px auto;
-            background: #fff;
-            border-radius: 15px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-            padding: 20px;
-            text-align: center;
-        }
-        .question-container {
-            display: none;
-        }
-        button {
-            padding: 10px 15px;
-            margin: 10px;
-            border-radius: 5px;
-            border: none;
-            font-size: 16px;
-            cursor: pointer;
-        }
-        #startBtn { background: blue; color: white; }
-        #checkBtn { background: green; color: white; }
-        #resetBtn { background: red; color: white; }
-        .options button {
-            display: block;
-            width: 100%;
-            margin: 5px 0;
-        }
-    </style>
 </head>
 <body>
     <h1>Trivia: Ciberseguridad</h1>
     <div class="container">
-        <div id="start-container">
-            <p>Bienvenido a la trivia de ciberseguridad. ¡Presiona empezar para jugar!</p>
-            <button id="startBtn">Empezar</button>
-        </div>
-        
-        <div id="question-container" class="question-container">
-            <p id="question-text"></p>
-            <div class="options">
-                <button class="option" data-value="0"></button>
-                <button class="option" data-value="1"></button>
-                <button class="option" data-value="2"></button>
-                <button class="option" data-value="3"></button>
+        <div id="trivia-box">
+            <h2 id="question-text">Presiona "Empezar" para iniciar</h2>
+            <div id="options-container">
+                <!-- Opciones dinámicas -->
             </div>
+            <button id="startBtn">Empezar</button>
+            <button id="checkBtn" style="display:none;">Verificar</button>
+            <button id="resetBtn" style="display:none;">Reiniciar</button>
             <p id="feedback"></p>
-            <button id="checkBtn">Verificar</button>
-            <button id="resetBtn">Reiniciar</button>
         </div>
     </div>
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            const startBtn = document.getElementById("startBtn");
-            const questionContainer = document.getElementById("question-container");
-            const startContainer = document.getElementById("start-container");
-            const questionText = document.getElementById("question-text");
-            const options = document.querySelectorAll(".option");
-            const feedback = document.getElementById("feedback");
-            const checkBtn = document.getElementById("checkBtn");
-            const resetBtn = document.getElementById("resetBtn");
-            
-            const questions = [
-                { question: "Filtra correos no deseados", answers: ["Firewall", "VPN", "Antivirus", "Spam"], correct: 3 },
-                { question: "Red Privada Virtual", answers: ["VPN", "Proxy", "Firewall", "Malware"], correct: 0 },
-                { question: "Copia de seguridad de datos", answers: ["Backup", "Phishing", "Rootkit", "Trojan"], correct: 0 },
-                { question: "Archivo que guarda sitios con tu info", answers: ["Cache", "Cookie", "Script", "Malware"], correct: 1 },
-                { question: "Software que protege contra virus", answers: ["Antivirus", "Spyware", "Adware", "Rootkit"], correct: 0 },
-                { question: "Barra el tráfico de red no autorizado", answers: ["Firewall", "Spam", "Phishing", "Keylogger"], correct: 0 }
-            ];
-            
-            let currentQuestion = 0;
-            let score = 0;
-            let attempts = 5;
-            
-            startBtn.addEventListener("click", () => {
-                startContainer.style.display = "none";
-                questionContainer.style.display = "block";
-                loadQuestion();
-            });
-            
-            function loadQuestion() {
-                if (currentQuestion < questions.length) {
-                    questionText.textContent = questions[currentQuestion].question;
-                    options.forEach((btn, index) => {
-                        btn.textContent = questions[currentQuestion].answers[index];
-                        btn.onclick = () => selectAnswer(index);
-                    });
-                } else {
-                    questionContainer.innerHTML = `<h2>Juego terminado</h2><p>Puntuación final: ${score}</p>`;
-                }
-            }
-            
-            function selectAnswer(index) {
-                if (index === questions[currentQuestion].correct) {
-                    score += 8;
-                    feedback.textContent = "¡Correcto!";
-                    feedback.style.color = "green";
-                } else {
-                    feedback.textContent = "Incorrecto";
-                    feedback.style.color = "red";
-                }
-                currentQuestion++;
-                setTimeout(loadQuestion, 1000);
-            }
-            
-            resetBtn.addEventListener("click", () => {
-                currentQuestion = 0;
-                score = 0;
-                feedback.textContent = "";
-                startContainer.style.display = "block";
-                questionContainer.style.display = "none";
-            });
-        });
-    </script>
 </body>
 </html>
-
 
