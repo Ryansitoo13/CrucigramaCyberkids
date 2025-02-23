@@ -1,42 +1,56 @@
 body {
-    background: linear-gradient(135deg, #b2ebf2 0%, #ffe0b2 100%);
     font-family: 'Comic Sans MS', cursive, sans-serif;
+    background: linear-gradient(135deg, #b2ebf2 0%, #ffe0b2 100%);
     text-align: center;
 }
-#trivia-container {
-    display: none;
+
+#trivia-box {
     background: white;
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    text-align: center;
     width: 50%;
     margin: auto;
 }
+
 #options button {
     display: block;
-    width: 80%;
-    margin: 5px auto;
-    padding: 10px;
+    width: 100%;
+    margin: 10px 0;
+    padding: 15px;
+    font-size: 18px;
     border: none;
     border-radius: 5px;
-    font-size: 16px;
     cursor: pointer;
-    color: white;
     font-weight: bold;
 }
-.option1 { background: #FF5733; } /* Rojo */
-.option2 { background: #33FF57; } /* Verde */
-.option3 { background: #3357FF; } /* Azul */
-.option4 { background: #FF33A1; } /* Rosa */
 
-#checkBtn, #resetBtn {
-    margin-top: 15px;
+#options button:nth-child(1) { color: red; }
+#options button:nth-child(2) { color: green; }
+#options button:nth-child(3) { color: blue; }
+#options button:nth-child(4) { color: purple; }
+
+.correct {
+    color: green;
+    font-weight: bold;
+}
+
+.incorrect {
+    color: red;
+    font-weight: bold;
+}
+
+#startBtn, #checkBtn, #resetBtn {
+    margin: 10px;
     padding: 10px 20px;
     font-size: 16px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
 }
+
+#startBtn { background: blue; color: white; }
 #checkBtn { background: green; color: white; }
 #resetBtn { background: red; color: white; }
 
