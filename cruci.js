@@ -1,72 +1,75 @@
-document.addEventListener("DOMContentLoaded", () => {
-    const questions = [
-        { question: "Filtra correos no deseados", options: ["Firewall", "VPN", "Antivirus", "Spam"], answer: "Spam" },
-        { question: "Red Privada Virtual", options: ["DNS", "VPN", "Proxy", "Malware"], answer: "VPN" },
-        { question: "Copia de seguridad de datos", options: ["Cifrado", "Backup", "Malware", "Phishing"], answer: "Backup" },
-        { question: "Archivo que guarda sitios con tu info", options: ["Cookies", "Firewall", "Rootkit", "Spoofing"], answer: "Cookies" },
-        { question: "Software que protege contra virus", options: ["Antivirus", "Ransomware", "Proxy", "Phishing"], answer: "Antivirus" },
-        { question: "Barra el tráfico de red no autorizado", options: ["Firewall", "Keylogger", "Rootkit", "Spam"], answer: "Firewall" }
-    ];
-    
-    let currentQuestionIndex = -1;
-    let score = 0;
-    
-    const questionElement = document.getElementById("question");
-    const optionsElement = document.getElementById("options");
-    const checkBtn = document.getElementById("checkBtn");
-    const resetBtn = document.getElementById("resetBtn");
+document.addEventListener("DOMContentLoaded", function () {
+    const startScreen = document.getElementById("startScreen");
+    const triviaContainer = document.getElementById("triviaContainer");
     const startBtn = document.getElementById("startBtn");
-    const feedbackElement = document.getElementById("feedback");
-    
+    const checkBtn = document.getElementById("checkBtn");
+    const resetBtn = document.getElementById("resetBtnTrivia");
+    const questionElem = document.getElementById("question");
+    const optionsContainer = document.getElementById("options");
+    const feedback = document.getElementById("feedback");
+
+    let currentQuestionIndex = 0;
+    let selectedOption = null;
+
+    const questions = [
+        { question: "Filtra correos no deseados", answer: "Spam", options: ["Firewall", "VPN", "Antivirus", "Spam"] },
+        { question: "Red Privada Virtual", answer: "VPN", options: ["VPN", "Malware", "Phishing", "Cifrado"] },
+        { question: "Copia de seguridad de datos", answer: "Backup", options: ["Cifrado", "Backup", "Malware", "Phishing"] },
+        { question: "Archivo que guarda sitios con tu info", answer: "Cookie", options: ["Firewall", "Cookie", "Virus", "Proxy"] },
+        { question: "Software que protege contra virus", answer: "Antivirus", options: ["Antivirus", "Spam", "Ransomware", "Malware"] },
+        { question: "Barra el tráfico de red no autorizado", answer: "Firewall", options: ["VPN", "Firewall", "Cifrado", "Phishing"] }
+    ];
+
     function loadQuestion() {
-        if (currentQuestionIndex >= questions.length - 1) {
-            questionElement.innerText = `Juego terminado. Puntuación: ${score}`;
-            optionsElement.innerHTML = "";
-            checkBtn.style.display = "none";
+        feedback.textContent = "";
+        selectedOption = null;
+        questionElem.textContent = questions[currentQuestionIndex].question;
+        optionsContainer.innerHTML = "";
+
+        questions[currentQuestionIndex].options.forEach(option => {
+            const btn = document.createElement("button");
+            btn.textContent = option;
+            btn.classList.add("option");
+            btn.addEventListener("click", () => {
+                document.querySelectorAll(".option").forEach(opt => opt.classList.remove("selected"));
+                btn.classList.add("selected");
+                selectedOption = option;
+            });
+            optionsContainer.appendChild(btn);
+        });
+    }
+
+    checkBtn.addEventListener("click", () => {
+        if (!selectedOption) {
+            feedback.textContent = "Selecciona una opción antes de verificar.";
+            feedback.style.color = "red";
             return;
         }
-        currentQuestionIndex++;
-        const q = questions[currentQuestionIndex];
-        questionElement.innerText = q.question;
-        optionsElement.innerHTML = "";
-        q.options.forEach(option => {
-            const btn = document.createElement("button");
-            btn.innerText = option;
-            btn.onclick = () => selectAnswer(option, q.answer, btn);
-            optionsElement.appendChild(btn);
-        });
-        checkBtn.style.display = "block";
-    }
-    
-    function selectAnswer(option, correctAnswer, button) {
-        if (option === correctAnswer) {
-            button.classList.add("correct");
-            feedbackElement.innerText = "Correcto";
-            score += 8;
+
+        if (selectedOption === questions[currentQuestionIndex].answer) {
+            feedback.textContent = "¡Correcto!";
+            feedback.style.color = "green";
+            currentQuestionIndex++;
+            if (currentQuestionIndex < questions.length) {
+                setTimeout(loadQuestion, 1000);
+            } else {
+                feedback.textContent = "¡Has completado la trivia!";
+            }
         } else {
-            button.classList.add("incorrect");
-            feedbackElement.innerText = "Incorrecto";
+            feedback.textContent = "Incorrecto";
+            feedback.style.color = "red";
         }
-        checkBtn.disabled = false;
-    }
-    
+    });
+
     startBtn.addEventListener("click", () => {
-        startBtn.style.display = "none";
+        startScreen.classList.add("hidden");
+        triviaContainer.classList.remove("hidden");
         loadQuestion();
     });
-    
-    checkBtn.addEventListener("click", () => {
-        loadQuestion();
-        feedbackElement.innerText = "";
-    });
-    
+
     resetBtn.addEventListener("click", () => {
-        currentQuestionIndex = -1;
-        score = 0;
-        startBtn.style.display = "block";
-        questionElement.innerText = "Presiona \"Empezar\" para iniciar";
-        optionsElement.innerHTML = "";
-        checkBtn.style.display = "none";
-        feedbackElement.innerText = "";
+        currentQuestionIndex = 0;
+        startScreen.classList.remove("hidden");
+        triviaContainer.classList.add("hidden");
     });
 });
