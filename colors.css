@@ -1,34 +1,29 @@
-/* Fondo colorido atractivo */
 body { 
-    background: linear-gradient(135deg, #ff6f61, #ffcc33); /* Rojo y amarillo */
+    background: linear-gradient(135deg, #ff7e5f 0%, #feb47b 100%);
     font-family: 'Comic Sans MS', cursive, sans-serif;
     text-align: center;
     margin: 0;
     padding: 20px;
 }
 
-/* Contenedor del juego */
 .container {
     max-width: 600px;
     margin: auto;
     background: white;
     padding: 20px;
-    border-radius: 15px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
 }
 
-/* Estilos de los botones */
 button {
-    padding: 12px 20px;
+    padding: 10px 20px;
     border: none;
     font-size: 18px;
     cursor: pointer;
     margin: 10px;
-    border-radius: 10px;
-    font-weight: bold;
+    border-radius: 5px;
 }
 
-/* Colores de los botones */
 #startBtn {
     background-color: blue;
     color: white;
@@ -44,53 +39,37 @@ button {
     color: white;
 }
 
-/* Opciones de respuesta */
 .option-btn {
     display: block;
     width: 100%;
     padding: 15px;
-    margin: 8px 0;
-    border-radius: 10px;
+    margin: 5px 0;
+    border-radius: 5px;
     font-weight: bold;
-    font-size: 20px;
+    font-size: 18px;
     cursor: pointer;
     border: 2px solid transparent;
-    background-color: #f1f1f1;
+    background-color: white; /* Color de fondo normal */
     color: black;
-    transition: 0.3s;
+    transition: background 0.3s, transform 0.2s;
 }
 
-/* Cambio de color al pasar el mouse */
+/* 🔥 Efecto cuando pasas el mouse por encima */
 .option-btn:hover {
-    background-color: #ffcc00; /* Amarillo oscuro */
-    color: black;
+    background-color: #ffcc00; /* Amarillo oscuro cuando pasas el cursor */
+    transform: scale(1.05); /* Pequeño aumento para hacer más atractivo */
 }
 
-/* Cuando se selecciona una opción */
+/* 🔹 Efecto cuando una opción es seleccionada */
 .option-btn.selected {
-    background-color: #ffa500; /* Naranja */
-    border: 3px solid black;
+    background-color: #ff9900; /* Un naranja más oscuro cuando se selecciona */
+    border-color: black;
 }
 
-/* Ocultar elementos cuando no son necesarios */
+/* Oculta los elementos que no se deben mostrar al inicio */
 .hidden {
     display: none;
 }
-
-/* Mejoras para pantallas pequeñas */
-@media screen and (max-width: 600px) {
-    .container {
-        width: 90%;
-        padding: 15px;
-    }
-
-    .option-btn {
-        font-size: 18px;
-        padding: 12px;
-    }
-}
-
-
 
 
 
