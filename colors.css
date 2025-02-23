@@ -45,7 +45,7 @@ button {
 }
 
 /* Opciones de respuesta */
-.option {
+.option-btn {
     display: block;
     width: 100%;
     padding: 15px;
@@ -55,24 +55,20 @@ button {
     font-size: 20px;
     cursor: pointer;
     border: 2px solid transparent;
-    transition: 0.3s; /* Suaviza el cambio de color */
+    background-color: #f1f1f1;
+    color: black;
+    transition: 0.3s;
 }
 
-/* Diferentes colores para opciones */
-.option:nth-child(1) { background-color: #ff6347; color: white; } /* Rojo */
-.option:nth-child(2) { background-color: #4CAF50; color: white; } /* Verde */
-.option:nth-child(3) { background-color: #2196F3; color: white; } /* Azul */
-.option:nth-child(4) { background-color: #FF1493; color: white; } /* Rosa */
-
-/* Efecto cuando se pasa el cursor: Amarillo oscuro */
-.option:hover {
-    background-color: #ffcc00 !important; /* Amarillo oscuro */
+/* Cambio de color al pasar el mouse */
+.option-btn:hover {
+    background-color: #ffcc00; /* Amarillo oscuro */
     color: black;
 }
 
-/* Resaltado cuando se selecciona */
-.option.selected {
-    filter: brightness(80%);
+/* Cuando se selecciona una opción */
+.option-btn.selected {
+    background-color: #ffa500; /* Naranja */
     border: 3px solid black;
 }
 
@@ -88,11 +84,12 @@ button {
         padding: 15px;
     }
 
-    .option {
+    .option-btn {
         font-size: 18px;
         padding: 12px;
     }
 }
+
 
 
 
