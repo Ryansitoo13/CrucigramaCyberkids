@@ -1,31 +1,46 @@
-body {
-    background: linear-gradient(135deg, #b2ebf2 0%, #ffe0b2 100%);
-    font-family: 'Comic Sans MS', cursive, sans-serif;
-    margin: 0;
-    padding: 20px;
-    text-align: center;
-}
-.container {
-    max-width: 600px;
-    margin: 0 auto;
-    background: #fff;
-    border-radius: 15px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    padding: 20px;
-}
-.trivia-box {
-    padding: 15px;
-    border-radius: 10px;
-    text-align: left;
-}
-button {
-    padding: 10px;
-    border-radius: 5px;
-    border: none;
-    color: white;
-    font-size: 16px;
-    cursor: pointer;
-    margin-top: 10px;
-}
-#checkBtn { background: green; }
-#resetBtn { background: red; }
+document.addEventListener("DOMContentLoaded", function () {
+    const questions = [
+        { question: "Filtra correos no deseados", answer: "SPAM" },
+        { question: "Red Privada Virtual", answer: "VPN" },
+        { question: "Copia de seguridad de datos", answer: "BACKUP" },
+        { question: "Archivo que guarda sitios con tu info", answer: "COOKIE" },
+        { question: "Software que protege contra virus", answer: "ANTIVIRUS" },
+        { question: "Barra el tráfico de red no autorizado", answer: "FIREWALL" }
+    ];
+    
+    const container = document.getElementById("questions");
+    const feedback = document.getElementById("feedback");
+    let score = 0;
+    let attempts = 5;
+    
+    questions.forEach((q, index) => {
+        const div = document.createElement("div");
+        div.innerHTML = `<p>${q.question}</p>
+                         <input type="text" id="q${index}" class="answer">`;
+        container.appendChild(div);
+    });
+    
+    document.getElementById("checkBtn").addEventListener("click", function () {
+        if (attempts > 0) {
+            score = 0;
+            questions.forEach((q, index) => {
+                const input = document.getElementById(`q${index}`);
+                if (input.value.toUpperCase() === q.answer) {
+                    input.style.backgroundColor = "lightgreen";
+                    score += 8;
+                } else {
+                    input.style.backgroundColor = "lightcoral";
+                }
+            });
+            attempts--;
+            feedback.innerText = `Puntuación: ${score}. Intentos restantes: ${attempts}`;
+        } else {
+            feedback.innerText = "No te quedan más intentos.";
+        }
+    });
+    
+    document.getElementById("resetBtn").addEventListener("click", function () {
+        location.reload();
+    });
+});
+
