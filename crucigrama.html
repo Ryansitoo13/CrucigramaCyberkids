@@ -65,6 +65,71 @@
             <button id="resetBtn">Reiniciar</button>
         </div>
     </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const startBtn = document.getElementById("startBtn");
+            const questionContainer = document.getElementById("question-container");
+            const startContainer = document.getElementById("start-container");
+            const questionText = document.getElementById("question-text");
+            const options = document.querySelectorAll(".option");
+            const feedback = document.getElementById("feedback");
+            const checkBtn = document.getElementById("checkBtn");
+            const resetBtn = document.getElementById("resetBtn");
+            
+            const questions = [
+                { question: "Filtra correos no deseados", answers: ["Firewall", "VPN", "Antivirus", "Spam"], correct: 3 },
+                { question: "Red Privada Virtual", answers: ["VPN", "Proxy", "Firewall", "Malware"], correct: 0 },
+                { question: "Copia de seguridad de datos", answers: ["Backup", "Phishing", "Rootkit", "Trojan"], correct: 0 },
+                { question: "Archivo que guarda sitios con tu info", answers: ["Cache", "Cookie", "Script", "Malware"], correct: 1 },
+                { question: "Software que protege contra virus", answers: ["Antivirus", "Spyware", "Adware", "Rootkit"], correct: 0 },
+                { question: "Barra el tráfico de red no autorizado", answers: ["Firewall", "Spam", "Phishing", "Keylogger"], correct: 0 }
+            ];
+            
+            let currentQuestion = 0;
+            let score = 0;
+            let attempts = 5;
+            
+            startBtn.addEventListener("click", () => {
+                startContainer.style.display = "none";
+                questionContainer.style.display = "block";
+                loadQuestion();
+            });
+            
+            function loadQuestion() {
+                if (currentQuestion < questions.length) {
+                    questionText.textContent = questions[currentQuestion].question;
+                    options.forEach((btn, index) => {
+                        btn.textContent = questions[currentQuestion].answers[index];
+                        btn.onclick = () => selectAnswer(index);
+                    });
+                } else {
+                    questionContainer.innerHTML = `<h2>Juego terminado</h2><p>Puntuación final: ${score}</p>`;
+                }
+            }
+            
+            function selectAnswer(index) {
+                if (index === questions[currentQuestion].correct) {
+                    score += 8;
+                    feedback.textContent = "¡Correcto!";
+                    feedback.style.color = "green";
+                } else {
+                    feedback.textContent = "Incorrecto";
+                    feedback.style.color = "red";
+                }
+                currentQuestion++;
+                setTimeout(loadQuestion, 1000);
+            }
+            
+            resetBtn.addEventListener("click", () => {
+                currentQuestion = 0;
+                score = 0;
+                feedback.textContent = "";
+                startContainer.style.display = "block";
+                questionContainer.style.display = "none";
+            });
+        });
+    </script>
 </body>
 </html>
+
 
