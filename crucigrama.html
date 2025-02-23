@@ -6,139 +6,23 @@
     <title>Trivia: Ciberseguridad</title>
     <link rel="stylesheet" href="colors.css">
     <script defer src="cruci.js"></script>
-    <style>
-        body {
-            background: linear-gradient(135deg, #b2ebf2 0%, #ffe0b2 100%);
-            font-family: 'Comic Sans MS', cursive, sans-serif;
-            margin: 0;
-            padding: 20px;
-            text-align: center;
-        }
-        .container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            max-width: 500px;
-            margin: 0 auto;
-            background: #fff;
-            border-radius: 15px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-            padding: 20px;
-        }
-        .hidden { display: none; }
-        .option {
-            display: block;
-            padding: 10px;
-            margin: 5px;
-            border-radius: 5px;
-            font-size: 18px;
-            cursor: pointer;
-            text-align: center;
-            background: lightgray;
-            color: black;
-            transition: background 0.3s;
-        }
-        .option:hover { background: darkgray; }
-        .selected { background: yellow !important; }
-        .btn-check {
-            background-color: green;
-            color: white;
-            font-size: 18px;
-            padding: 10px;
-            margin-top: 10px;
-            border: none;
-            cursor: pointer;
-        }
-        .btn-reset {
-            background-color: red;
-            color: white;
-            font-size: 18px;
-            padding: 10px;
-            margin-top: 10px;
-            border: none;
-            cursor: pointer;
-        }
-        #feedback {
-            margin-top: 10px;
-            font-weight: bold;
-        }
-    </style>
 </head>
 <body>
     <h1>Trivia: Ciberseguridad</h1>
     <div class="container">
-        <div id="start-screen">
+        <div id="startScreen">
             <p>Presiona "Empezar" para iniciar</p>
             <button id="startBtn">Empezar</button>
+            <button id="resetBtn">Reiniciar</button>
         </div>
-        <div id="trivia-container" class="hidden">
-            <p id="question"></p>
+        <div id="triviaContainer" class="hidden">
+            <h2 id="question">Pregunta</h2>
             <div id="options"></div>
-            <button id="checkBtn" class="btn-check">Verificar</button>
-            <button id="resetBtn" class="btn-reset">Reiniciar</button>
+            <button id="checkBtn">Verificar</button>
+            <button id="resetBtnTrivia">Reiniciar</button>
             <p id="feedback"></p>
         </div>
     </div>
-    <script>
-        const questions = [
-            { question: "Filtra correos no deseados", options: ["Firewall", "VPN", "Antivirus", "Spam"], answer: "Spam" },
-            { question: "Red Privada Virtual", options: ["Router", "VPN", "Proxy", "DNS"], answer: "VPN" },
-            { question: "Copia de seguridad de datos", options: ["Cifrado", "Backup", "Malware", "Phishing"], answer: "Backup" },
-            { question: "Archivo que guarda sitios con tu info", options: ["Firewall", "Cookie", "Antivirus", "Spam"], answer: "Cookie" },
-            { question: "Software que protege contra virus", options: ["Spyware", "Antivirus", "Trojan", "Rootkit"], answer: "Antivirus" },
-            { question: "Barra el tráfico de red no autorizado", options: ["Firewall", "Worm", "Spyware", "DNS"], answer: "Firewall" }
-        ];
-        let currentQuestion = 0;
-        let selectedAnswer = "";
-
-        document.getElementById("startBtn").addEventListener("click", function() {
-            document.getElementById("start-screen").classList.add("hidden");
-            document.getElementById("trivia-container").classList.remove("hidden");
-            loadQuestion();
-        });
-
-        function loadQuestion() {
-            const q = questions[currentQuestion];
-            document.getElementById("question").textContent = q.question;
-            const optionsContainer = document.getElementById("options");
-            optionsContainer.innerHTML = "";
-            q.options.forEach(option => {
-                const btn = document.createElement("button");
-                btn.classList.add("option");
-                btn.textContent = option;
-                btn.addEventListener("click", function() {
-                    document.querySelectorAll(".option").forEach(btn => btn.classList.remove("selected"));
-                    btn.classList.add("selected");
-                    selectedAnswer = option;
-                });
-                optionsContainer.appendChild(btn);
-            });
-        }
-
-        document.getElementById("checkBtn").addEventListener("click", function() {
-            if (!selectedAnswer) return;
-            const correct = questions[currentQuestion].answer === selectedAnswer;
-            document.getElementById("feedback").textContent = correct ? "¡Correcto!" : "Incorrecto";
-            if (correct) {
-                currentQuestion++;
-                if (currentQuestion < questions.length) {
-                    setTimeout(() => {
-                        document.getElementById("feedback").textContent = "";
-                        loadQuestion();
-                    }, 1000);
-                } else {
-                    document.getElementById("feedback").textContent = "¡Trivia completada!";
-                }
-            }
-        });
-
-        document.getElementById("resetBtn").addEventListener("click", function() {
-            currentQuestion = 0;
-            selectedAnswer = "";
-            document.getElementById("feedback").textContent = "";
-            loadQuestion();
-        });
-    </script>
 </body>
 </html>
+     
