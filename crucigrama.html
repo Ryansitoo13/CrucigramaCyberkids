@@ -6,21 +6,57 @@
     <title>Trivia: Ciberseguridad</title>
     <link rel="stylesheet" href="colors.css">
     <script defer src="cruci.js"></script>
+    <style>
+        body {
+            background: linear-gradient(135deg, #b2ebf2 0%, #ffe0b2 100%);
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            text-align: center;
+        }
+        #trivia-container {
+            display: none;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            width: 50%;
+            margin: auto;
+        }
+        #options button {
+            display: block;
+            width: 80%;
+            margin: 5px auto;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        #checkBtn, #resetBtn {
+            margin-top: 15px;
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        #checkBtn { background: green; color: white; }
+        #resetBtn { background: red; color: white; }
+    </style>
 </head>
 <body>
     <h1>Trivia: Ciberseguridad</h1>
-    <div class="container">
-        <div id="trivia-box">
-            <h2 id="question-text">Presiona "Empezar" para iniciar</h2>
-            <div id="options-container">
-                <!-- Opciones dinámicas -->
-            </div>
-            <button id="startBtn">Empezar</button>
-            <button id="checkBtn" style="display:none;">Verificar</button>
-            <button id="resetBtn" style="display:none;">Reiniciar</button>
-            <p id="feedback"></p>
-        </div>
+    <div id="start-screen">
+        <p>Presiona "Empezar" para iniciar</p>
+        <button id="start-btn">Empezar</button>
+    </div>
+    <div id="trivia-container">
+        <p id="question"></p>
+        <div id="options"></div>
+        <button id="checkBtn">Verificar</button>
+        <button id="resetBtn">Reiniciar</button>
+        <p id="feedback"></p>
     </div>
 </body>
 </html>
+
 
