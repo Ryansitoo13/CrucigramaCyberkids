@@ -1,126 +1,126 @@
 /* ===========================
-   Reseteo básico y fondo
+   Reseteo básico
+=========================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ===========================
+   Fondo y tipografía
 =========================== */
 html, body {
-    margin: 0;
-    padding: 0;
-    font-family: 'Comic Sans MS', cursive, sans-serif;
-    background: linear-gradient(135deg, #ff7e5f 0%, #feb47b 100%);
-    text-align: center;
+  width: 100%;
+  font-family: 'Comic Sans MS', cursive, sans-serif;
+  background: linear-gradient(135deg, #ff7e5f 0%, #feb47b 100%);
+  text-align: center;
 }
 
 /* ===========================
    Título principal
 =========================== */
 h1 {
-    font-size: 36px;
-    font-weight: bold;
-    margin: 20px;
-    /* Efecto de gradiente en el texto */
-    background: linear-gradient(to right, blue, green, red);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
+  font-size: 36px;
+  font-weight: bold;
+  margin: 20px;
+  background: linear-gradient(to right, blue, green, red);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
 }
 
 /* ===========================
    Contenedor principal
 =========================== */
 .container {
-    max-width: 600px;
-    margin: auto;
-    background: white;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+  max-width: 600px;
+  margin: 20px auto;
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.2);
+  text-align: center;
 }
 
 /* ===========================
-   Ocultación de secciones
+   Ocultar secciones
 =========================== */
 .hidden {
-    display: none;
+  display: none;
 }
 
 /* ===========================
-   Botones generales
+   Botones
 =========================== */
 button {
-    padding: 10px 20px;
-    border: none;
-    font-size: 18px;
-    cursor: pointer;
-    margin: 10px;
-    border-radius: 5px;
+  padding: 10px 20px;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+  margin: 10px;
+  border-radius: 5px;
 }
 
-/* Botones específicos */
 #startBtn {
-    background-color: blue;
-    color: white;
+  background-color: blue;
+  color: white;
 }
 
 #verifyBtn {
-    background-color: green;
-    color: white;
+  background-color: green;
+  color: white;
 }
 
 #resetBtn {
-    background-color: red;
-    color: white;
+  background-color: red;
+  color: white;
 }
 
 /* ===========================
-   Pregunta y opciones
+   Opciones y texto
 =========================== */
-.question-text {
-    font-size: 22px;
-    font-weight: bold;
-    margin-bottom: 20px;
+#options {
+  margin: 20px 0;
 }
 
-.options-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: 20px;
+.option-btn {
+  display: block;
+  width: 100%;
+  padding: 15px;
+  margin: 5px 0;
+  border-radius: 5px;
+  font-weight: bold;
+  font-size: 18px;
+  cursor: pointer;
+  border: 2px solid transparent;
+  background-color: #fff;
+  color: black;
+  transition: background 0.3s, transform 0.2s;
 }
 
-/* Botón de opción */
-.option {
-    display: block;
-    width: 100%;
-    padding: 15px;
-    margin: 5px 0;
-    border-radius: 5px;
-    font-weight: bold;
-    font-size: 18px;
-    cursor: pointer;
-    border: 2px solid transparent;
-    background-color: white;
-    color: black;
-    transition: background 0.3s, transform 0.2s;
+.option-btn:hover {
+  background-color: #ffcc00;
+  transform: scale(1.05);
 }
 
-/* Efectos al pasar el mouse */
-.option:hover {
-    background-color: #ffcc00;
-    transform: scale(1.05);
-}
-
-/* Opción seleccionada */
-.option.selected {
-    background-color: #ff9900;
-    border-color: black;
+.option-btn.selected {
+  background-color: #ff9900;
+  border-color: black;
 }
 
 /* ===========================
-   Retroalimentación
+   Retroalimentación y puntaje
 =========================== */
 #feedback {
-    font-size: 20px;
-    font-weight: bold;
-    min-height: 30px; /* Reserva espacio para no saltar la interfaz */
+  margin: 10px 0;
+  font-size: 20px;
+  font-weight: bold;
 }
 
+#score {
+  margin-top: 10px;
+  font-size: 18px;
+  font-weight: bold;
+}
 
