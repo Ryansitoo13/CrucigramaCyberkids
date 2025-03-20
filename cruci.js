@@ -40,7 +40,7 @@ document.addEventListener("DOMContentLoaded", function() {
     loadQuestion();
   });
 
-  // Cargar una pregunta
+  // Cargar la pregunta actual
   function loadQuestion() {
     const question = questions[currentQuestionIndex];
     questionText.innerText = question.question;
@@ -64,20 +64,20 @@ document.addEventListener("DOMContentLoaded", function() {
     });
   }
 
-  // Verificar respuesta
+  // Verificar la respuesta
   verifyBtn.addEventListener("click", function() {
     let question = questions[currentQuestionIndex];
     if (selectedAnswer === question.correct) {
       feedback.innerText = "Correcto";
       feedback.style.color = "green";
-      score += 10; // Suma de puntos a gusto
+      score += 10; // Aumenta puntos a tu gusto
     } else {
       feedback.innerText = "Incorrecto";
       feedback.style.color = "red";
     }
     scoreDisplay.innerText = `Puntos: ${score}`;
 
-    // Pasamos a la siguiente pregunta con un retardo
+    // Mostrar siguiente pregunta con retardo
     currentQuestionIndex++;
     setTimeout(() => {
       if (currentQuestionIndex < questions.length) {
@@ -91,7 +91,7 @@ document.addEventListener("DOMContentLoaded", function() {
     }, 1000);
   });
 
-  // Reiniciar el juego
+  // Reiniciar la trivia
   resetBtn.addEventListener("click", function() {
     currentQuestionIndex = 0;
     score = 0;
@@ -99,10 +99,9 @@ document.addEventListener("DOMContentLoaded", function() {
     feedback.innerText = "";
     verifyBtn.classList.add("hidden");
 
-    // Regresar a pantalla de inicio
+    // Volver a la pantalla de inicio
     quizScreen.classList.add("hidden");
     startScreen.classList.remove("hidden");
   });
 });
-
 
