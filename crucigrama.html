@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <title>Trivia de Ciberseguridad</title>
-  <!-- Vincular el CSS -->
-  <link rel="stylesheet" href="trivia.css">
-  <!-- Asegurar carga del JS después del DOM -->
-  <script defer src="trivia.js"></script>
+  <!-- Enlazamos el CSS (llamado "colors.css") -->
+  <link rel="stylesheet" href="colors.css">
+  <!-- Cargamos el JS después del DOM (llamado "cruci.js") -->
+  <script defer src="cruci.js"></script>
 </head>
 <body>
   <h1>Trivia: Ciberseguridad</h1>
@@ -18,7 +18,7 @@
       <button id="startBtn">Empezar</button>
     </div>
 
-    <!-- Pantalla de la trivia (oculta al principio) -->
+    <!-- Pantalla de la trivia (oculta al inicio) -->
     <div id="quiz-screen" class="hidden">
       <h2 id="question-text"></h2>
 
@@ -28,19 +28,15 @@
       <!-- Botón para verificar la respuesta seleccionada -->
       <button id="verifyBtn" class="hidden">Verificar</button>
 
-      <!-- Retroalimentación (correcto/incorrecto) -->
+      <!-- Mensaje de retroalimentación (correcto/incorrecto) -->
       <p id="feedback"></p>
 
       <!-- Marcador de puntos -->
       <p id="score">Puntos: 0</p>
 
-      <!-- Botón de Reiniciar -->
+      <!-- Botón de reinicio -->
       <button id="resetBtn">Reiniciar</button>
     </div>
   </div>
-
-  <!-- Si tuvieras un footer, podrías ocultarlo en iframe como en el ejemplo anterior.
-       Aquí no hay footer, así que no duplicará nada en Odoo. -->
 </body>
 </html>
-
