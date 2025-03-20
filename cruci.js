@@ -1,114 +1,117 @@
-document.addEventListener("DOMContentLoaded", function () {
-  const draggables = document.querySelectorAll(".draggable");
-  const droppables = document.querySelectorAll(".droppable");
-  const restartBtn = document.getElementById("restart-btn");
-  const message = document.getElementById("message");
-  const finalScoreDisplay = document.getElementById("final-score");
+document.addEventListener("DOMContentLoaded", function() {
+  // Lista de preguntas
+  let questions = [
+    { 
+      question: "Filtra correos no deseados", 
+      correct: "Spam", 
+      options: ["Firewall", "VPN", "Antivirus", "Spam"] 
+    },
+    { 
+      question: "Red Privada Virtual", 
+      correct: "VPN", 
+      options: ["Firewall", "VPN", "Antivirus", "Spam"] 
+    },
+    { 
+      question: "Copia de seguridad de datos", 
+      correct: "Backup", 
+      options: ["Cifrado", "Backup", "Malware", "Phishing"] 
+    },
+    {
+      question: "Archivo que guarda sitios con tu info",
+      correct: "Cookie",
+      options: ["Historial", "Cookie", "Spyware", "Ransomware"]
+    },
+    {
+      question: "Software que protege contra virus",
+      correct: "Antivirus",
+      options: ["Antivirus", "Rootkit", "Adware", "Troyano"]
+    },
+    {
+      question: "Barra el tráfico de red no autorizado",
+      correct: "Firewall",
+      options: ["Firewall", "Worm", "Spyware", "Backdoor"]
+    }
+  ];
+
+  let currentQuestionIndex = 0;
+  let score = 0;
+  let selectedAnswer = "";
+
+  // Referencias a elementos del DOM
+  const startBtn = document.getElementById("startBtn");
+  const quizScreen = document.getElementById("quiz-screen");
+  const startScreen = document.getElementById("start-screen");
+  const questionText = document.getElementById("question-text");
+  const optionsDiv = document.getElementById("options");
+  const verifyBtn = document.getElementById("verifyBtn");
+  const feedback = document.getElementById("feedback");
   const scoreDisplay = document.getElementById("score");
+  const resetBtn = document.getElementById("resetBtn");
 
-  let attempts = 0;       
-  let score = 0;          
-  const maxAttempts = 2;  
-
-  // Activar arrastre en los .draggable
-  draggables.forEach(draggable => {
-    draggable.addEventListener("dragstart", function (event) {
-      event.dataTransfer.setData("text", event.target.id);
-    });
+  // Iniciar la trivia
+  startBtn.addEventListener("click", function() {
+    startScreen.classList.add("hidden");
+    quizScreen.classList.remove("hidden");
+    loadQuestion();
   });
 
-  // Manejo de drop en las definiciones
-  droppables.forEach(droppable => {
-    droppable.addEventListener("dragover", function (event) {
-      event.preventDefault();
-    });
+  // Cargar la pregunta actual
+  function loadQuestion() {
+    let question = questions[currentQuestionIndex];
+    questionText.innerText = question.question;
+    optionsDiv.innerHTML = "";
+    feedback.innerText = "";
+    selectedAnswer = "";
 
-    droppable.addEventListener("drop", function (event) {
-      event.preventDefault();
-      const draggedId = event.dataTransfer.getData("text");
-      const draggedElement = document.getElementById(draggedId);
-
-      // Validar coincidencia con data-match
-      if (draggedElement && droppable.getAttribute("data-match") === draggedId) {
-        // ¡Correcto!
-        let points = parseInt(draggedElement.getAttribute("data-score")) || 10;
-        score += points;
-        scoreDisplay.textContent = score;
-
-        // Marcar visualmente la definición como correcta (sin cambiar su texto)
-        droppable.classList.add("correct-drop");
-
-        // El ataque desaparece de la izquierda
-        draggedElement.remove();
-
-        message.style.color = "green";
-        message.textContent = "¡Correcto! Sigue colocando los demás.";
-      } else {
-        // ¡Incorrecto! Se elimina el ataque
-        if (draggedElement) {
-          draggedElement.remove();
-        }
-        message.style.color = "red";
-        message.textContent = "¡Fallaste!";
-      }
-    });
-  });
-
-  // Botón para finalizar cada intento
-  restartBtn.addEventListener("click", function () {
-    attempts++;
-
-    if (attempts < maxAttempts) {
-      // Primer intento terminado => reiniciamos el tablero
-      resetGame();
-      message.style.color = "green";
-      message.textContent = Terminaste el intento ${attempts}. ¡A jugar de nuevo!;
-    } else {
-      // Segundo intento => fin del juego
-      restartBtn.style.display = "none";
-      finalScoreDisplay.classList.remove("hidden");
-      finalScoreDisplay.textContent = Tu puntuación final fue: ${score};
-      message.style.color = "blue";
-      message.textContent = "Has agotado tus intentos. Juego finalizado.";
-
-      // Opcional: bloquear las definiciones o marcarlas
-      droppables.forEach(d => {
-        d.classList.add("finalized-drop");
+    question.options.forEach(option => {
+      let button = document.createElement("button");
+      button.innerText = option;
+      button.classList.add("option-btn");
+      button.addEventListener("click", function() {
+        // Quitar selección previa
+        document.querySelectorAll(".option-btn").forEach(btn => btn.classList.remove("selected"));
+        button.classList.add("selected");
+        selectedAnswer = option;
+        verifyBtn.classList.remove("hidden");
       });
+      optionsDiv.appendChild(button);
+    });
+  }
+
+  // Verificar la respuesta
+  verifyBtn.addEventListener("click", function() {
+    let question = questions[currentQuestionIndex];
+    if (selectedAnswer === question.correct) {
+      feedback.innerText = "Correcto";
+      feedback.style.color = "green";
+      score += 8; // Sube 8 puntos por acierto
+    } else {
+      feedback.innerText = "Incorrecto";
+      feedback.style.color = "red";
+    }
+    scoreDisplay.innerText = `Puntos: ${score}`;
+
+    currentQuestionIndex++;
+    if (currentQuestionIndex < questions.length) {
+      // Muestra la siguiente pregunta tras 1s
+      setTimeout(loadQuestion, 1000);
+      verifyBtn.classList.add("hidden");
+    } else {
+      // Fin de la trivia
+      feedback.innerText = `Juego terminado. Puntos finales: ${score}`;
+      verifyBtn.classList.add("hidden");
     }
   });
 
-  function resetGame() {
-    // Reiniciar puntaje (si quieres sumarlo entre intentos, coméntalo)
+  // Reiniciar la trivia
+  resetBtn.addEventListener("click", function() {
+    currentQuestionIndex = 0;
     score = 0;
-    scoreDisplay.textContent = score;
-
-    message.textContent = "";
-    message.style.color = "black";
-    finalScoreDisplay.classList.add("hidden");
-
-    // Quitar clase correct-drop/finalized-drop
-    droppables.forEach(d => {
-      d.classList.remove("correct-drop", "finalized-drop");
-    });
-
-    // Restaurar la columna de Ataques
-    const leftContainer = document.getElementById("attacks");
-    leftContainer.innerHTML = 
-      <h3>Ataques</h3>
-      <div class="draggable" draggable="true" id="phishing" data-score="10">Phishing</div>
-      <div class="draggable" draggable="true" id="malware" data-score="10">Malware</div>
-      <div class="draggable" draggable="true" id="ransomware" data-score="10">Ransomware</div>
-      <div class="draggable" draggable="true" id="ingenieria" data-score="10">Ingeniería Social</div>
-    ;
-
-    // Volver a habilitar dragstart en estos nuevos .draggable
-    const newDraggables = leftContainer.querySelectorAll(".draggable");
-    newDraggables.forEach(d => {
-      d.addEventListener("dragstart", e => {
-        e.dataTransfer.setData("text", e.target.id);
-      });
-    });
-  }
+    scoreDisplay.innerText = "Puntos: 0";
+    feedback.innerText = "";
+    verifyBtn.classList.add("hidden");
+    loadQuestion();
+  });
 });
+
 
