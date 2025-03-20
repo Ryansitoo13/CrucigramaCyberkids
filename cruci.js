@@ -1,114 +1,105 @@
-// Array de preguntas con sus respuestas correctas
-const questions = [
-    { 
-      question: "Filtra correos no deseados", 
-      answers: ["Firewall", "VPN", "Antivirus", "Spam"], 
-      correct: "Spam" 
+document.addEventListener("DOMContentLoaded", function() {
+  // Lista de preguntas
+  const questions = [
+    {
+      question: "Filtra correos no deseados",
+      correct: "Spam",
+      options: ["Firewall", "VPN", "Antivirus", "Spam"]
     },
-    { 
-      question: "Red Privada Virtual", 
-      answers: ["Firewall", "VPN", "Malware", "Phishing"], 
-      correct: "VPN" 
+    {
+      question: "Red Privada Virtual",
+      correct: "VPN",
+      options: ["Firewall", "VPN", "Antivirus", "Spam"]
     },
-    { 
-      question: "Copia de seguridad de datos", 
-      answers: ["Cifrado", "Backup", "Malware", "Phishing"], 
-      correct: "Backup" 
-    },
-    { 
-      question: "Archivo que guarda sitios con tu info", 
-      answers: ["Historial", "Cookie", "Spyware", "Ransomware"], 
-      correct: "Cookie" 
-    },
-    { 
-      question: "Software que protege contra virus", 
-      answers: ["Antivirus", "Rootkit", "Adware", "Troyano"], 
-      correct: "Antivirus" 
-    },
-    { 
-      question: "Barra el tráfico de red no autorizado", 
-      answers: ["Firewall", "Worm", "Spyware", "Backdoor"], 
-      correct: "Firewall" 
+    {
+      question: "Copia de seguridad de datos",
+      correct: "Backup",
+      options: ["Cifrado", "Backup", "Malware", "Phishing"]
     }
-];
+  ];
 
-// Variables de estado
-let currentQuestionIndex = 0;
-let selectedAnswer = "";
+  // Referencias al DOM
+  const startBtn = document.getElementById("startBtn");
+  const quizScreen = document.getElementById("quiz-screen");
+  const startScreen = document.getElementById("start-screen");
+  const questionText = document.getElementById("question-text");
+  const optionsDiv = document.getElementById("options");
+  const verifyBtn = document.getElementById("verifyBtn");
+  const feedback = document.getElementById("feedback");
+  const scoreDisplay = document.getElementById("score");
+  const resetBtn = document.getElementById("resetBtn");
 
-// Referencias al DOM
-const startScreen = document.getElementById("start-screen");
-const quizContainer = document.getElementById("quiz-container");
-const questionText = document.getElementById("question-text");
-const optionsContainer = document.getElementById("options-container");
-const verifyBtn = document.getElementById("verifyBtn");
-const resetBtn = document.getElementById("resetBtn");
-const startBtn = document.getElementById("startBtn");
-const feedback = document.getElementById("feedback");
+  let currentQuestionIndex = 0;
+  let score = 0;
+  let selectedAnswer = "";
 
-// Evento para iniciar la trivia
-startBtn.addEventListener("click", () => {
+  // Iniciar trivia
+  startBtn.addEventListener("click", function() {
     startScreen.classList.add("hidden");
-    quizContainer.classList.remove("hidden");
+    quizScreen.classList.remove("hidden");
     loadQuestion();
-});
+  });
 
-// Carga la pregunta actual en pantalla
-function loadQuestion() {
-    const currentQuestion = questions[currentQuestionIndex];
-    questionText.textContent = currentQuestion.question;
-    optionsContainer.innerHTML = "";
-    verifyBtn.classList.add("hidden");
+  // Cargar pregunta
+  function loadQuestion() {
+    const question = questions[currentQuestionIndex];
+    questionText.innerText = question.question;
+    optionsDiv.innerHTML = "";
+    feedback.innerText = "";
     selectedAnswer = "";
 
-    currentQuestion.answers.forEach(answer => {
-        const button = document.createElement("button");
-        button.textContent = answer;
-        button.classList.add("option");
-        button.addEventListener("click", () => selectAnswer(button, answer));
-        optionsContainer.appendChild(button);
+    question.options.forEach(option => {
+      let button = document.createElement("button");
+      button.innerText = option;
+      button.classList.add("option-btn");
+      button.addEventListener("click", function() {
+        document.querySelectorAll(".option-btn").forEach(btn => btn.classList.remove("selected"));
+        button.classList.add("selected");
+        selectedAnswer = option;
+        verifyBtn.classList.remove("hidden");
+      });
+      optionsDiv.appendChild(button);
     });
-}
+  }
 
-// Selecciona una respuesta y muestra el botón "Verificar"
-function selectAnswer(button, answer) {
-    selectedAnswer = answer;
-    document.querySelectorAll(".option").forEach(btn => btn.classList.remove("selected"));
-    button.classList.add("selected");
-    verifyBtn.classList.remove("hidden");
-}
-
-// Verifica si la respuesta elegida es correcta o no
-verifyBtn.addEventListener("click", () => {
-    const currentQuestion = questions[currentQuestionIndex];
-    if (selectedAnswer === currentQuestion.correct) {
-        feedback.textContent = "Correcto";
-        feedback.style.color = "green";
+  // Verificar respuesta
+  verifyBtn.addEventListener("click", function() {
+    let question = questions[currentQuestionIndex];
+    if (selectedAnswer === question.correct) {
+      feedback.innerText = "Correcto";
+      feedback.style.color = "green";
+      score += 10; // suma puntos a tu gusto
     } else {
-        feedback.textContent = "Incorrecto";
-        feedback.style.color = "red";
+      feedback.innerText = "Incorrecto";
+      feedback.style.color = "red";
     }
+    scoreDisplay.innerText = `Puntos: ${score}`;
 
     // Pasamos a la siguiente pregunta con un pequeño retardo
+    currentQuestionIndex++;
     setTimeout(() => {
-        if (currentQuestionIndex < questions.length - 1) {
-            currentQuestionIndex++;
-            loadQuestion();
-            feedback.textContent = "";
-        } else {
-            // No hay más preguntas
-            feedback.textContent = "¡Juego terminado!";
-            verifyBtn.classList.add("hidden");
-        }
+      if (currentQuestionIndex < questions.length) {
+        loadQuestion();
+        verifyBtn.classList.add("hidden");
+      } else {
+        // Fin de la trivia
+        feedback.innerText = `Juego terminado. Puntos finales: ${score}`;
+        verifyBtn.classList.add("hidden");
+      }
     }, 1000);
-});
+  });
 
-// Reinicia la trivia
-resetBtn.addEventListener("click", () => {
+  // Reiniciar juego
+  resetBtn.addEventListener("click", function() {
     currentQuestionIndex = 0;
-    selectedAnswer = "";
-    feedback.textContent = "";
-    quizContainer.classList.add("hidden");
+    score = 0;
+    scoreDisplay.innerText = "Puntos: 0";
+    feedback.innerText = "";
+    verifyBtn.classList.add("hidden");
+
+    // Regresar a la pantalla de inicio
+    quizScreen.classList.add("hidden");
     startScreen.classList.remove("hidden");
+  });
 });
 
