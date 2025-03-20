@@ -1,5 +1,5 @@
 /* ===========================
-   Reseteo básico
+   RESETEO BÁSICO
 =========================== */
 * {
   margin: 0;
@@ -8,77 +8,80 @@
 }
 
 /* ===========================
-   Fondo y tipografía
+   FONDO Y TIPOGRAFÍA
 =========================== */
 html, body {
   width: 100%;
+  height: 100%;
   font-family: 'Comic Sans MS', cursive, sans-serif;
-  background: linear-gradient(135deg, #ff7e5f 0%, #feb47b 100%);
   text-align: center;
+  background: linear-gradient(180deg, #ff9069 0%, #ffcfa3 100%); /* degradado naranja */
 }
 
 /* ===========================
-   Título principal
+   TÍTULO PRINCIPAL
 =========================== */
 h1 {
-  font-size: 36px;
-  font-weight: bold;
-  margin: 20px;
-  background: linear-gradient(to right, blue, green, red);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
+  font-size: 48px;
+  color: #0b8f00;           /* verde */
+  margin: 30px 0;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
 }
 
 /* ===========================
-   Contenedor principal
+   CONTENEDOR PRINCIPAL
 =========================== */
 .container {
-  max-width: 600px;
-  margin: 20px auto;
-  background: white;
+  width: 90%;
+  max-width: 700px;
+  margin: 0 auto 40px;
+  background: #fff;
   padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.2);
-  text-align: center;
+  border-radius: 20px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
 }
 
 /* ===========================
-   Ocultar secciones
+   OCULTAR SECCIONES
 =========================== */
 .hidden {
   display: none;
 }
 
 /* ===========================
-   Botones
+   BOTONES
 =========================== */
 button {
-  padding: 10px 20px;
+  padding: 12px 24px;
   border: none;
   font-size: 18px;
   cursor: pointer;
   margin: 10px;
-  border-radius: 5px;
+  border-radius: 8px;
+  transition: transform 0.2s;
+}
+
+button:hover {
+  transform: scale(1.05);
 }
 
 #startBtn {
-  background-color: blue;
-  color: white;
+  background-color: #0000ff; /* azul brillante */
+  color: #fff;
 }
 
 #verifyBtn {
-  background-color: green;
-  color: white;
+  background-color: #119911; /* verde */
+  color: #fff;
 }
 
 #resetBtn {
-  background-color: red;
-  color: white;
+  background-color: #d60a0a; /* rojo */
+  color: #fff;
 }
 
 /* ===========================
-   Opciones y texto
+   OPCIONES Y TEXTO
 =========================== */
 #options {
   margin: 20px 0;
@@ -89,33 +92,34 @@ button {
   width: 100%;
   padding: 15px;
   margin: 5px 0;
-  border-radius: 5px;
+  border-radius: 8px;
   font-weight: bold;
   font-size: 18px;
   cursor: pointer;
   border: 2px solid transparent;
   background-color: #fff;
-  color: black;
+  color: #000;
   transition: background 0.3s, transform 0.2s;
 }
 
 .option-btn:hover {
-  background-color: #ffcc00;
-  transform: scale(1.05);
+  background-color: #ffd966;
+  transform: scale(1.02);
 }
 
 .option-btn.selected {
-  background-color: #ff9900;
-  border-color: black;
+  background-color: #ffb347;
+  border-color: #000;
 }
 
 /* ===========================
-   Retroalimentación y puntaje
+   RETROALIMENTACIÓN Y PUNTAJE
 =========================== */
 #feedback {
   margin: 10px 0;
   font-size: 20px;
   font-weight: bold;
+  min-height: 30px; /* Para no cambiar de tamaño cuando no hay mensaje */
 }
 
 #score {
