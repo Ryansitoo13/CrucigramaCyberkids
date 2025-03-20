@@ -1,20 +1,31 @@
-body { 
-    background: linear-gradient(135deg, #ff7e5f 0%, #feb47b 100%);
-    font-family: 'Comic Sans MS', cursive, sans-serif;
-    text-align: center;
+/* ===========================
+   Reseteo básico y fondo
+=========================== */
+html, body {
     margin: 0;
-    padding: 20px;
+    padding: 0;
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    background: linear-gradient(135deg, #ff7e5f 0%, #feb47b 100%);
+    text-align: center;
 }
 
+/* ===========================
+   Título principal
+=========================== */
 h1 {
     font-size: 36px;
     font-weight: bold;
-    text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
+    margin: 20px;
+    /* Efecto de gradiente en el texto */
     background: linear-gradient(to right, blue, green, red);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+    text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
 }
 
+/* ===========================
+   Contenedor principal
+=========================== */
 .container {
     max-width: 600px;
     margin: auto;
@@ -24,6 +35,16 @@ h1 {
     box-shadow: 0 0 10px rgba(0,0,0,0.2);
 }
 
+/* ===========================
+   Ocultación de secciones
+=========================== */
+.hidden {
+    display: none;
+}
+
+/* ===========================
+   Botones generales
+=========================== */
 button {
     padding: 10px 20px;
     border: none;
@@ -33,6 +54,7 @@ button {
     border-radius: 5px;
 }
 
+/* Botones específicos */
 #startBtn {
     background-color: blue;
     color: white;
@@ -48,7 +70,24 @@ button {
     color: white;
 }
 
-.option-btn {
+/* ===========================
+   Pregunta y opciones
+=========================== */
+.question-text {
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.options-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+/* Botón de opción */
+.option {
     display: block;
     width: 100%;
     padding: 15px;
@@ -63,21 +102,25 @@ button {
     transition: background 0.3s, transform 0.2s;
 }
 
-/* Efecto cuando pasas el mouse por encima */
-.option-btn:hover {
+/* Efectos al pasar el mouse */
+.option:hover {
     background-color: #ffcc00;
     transform: scale(1.05);
 }
 
-/* Efecto cuando una opción es seleccionada */
-.option-btn.selected {
+/* Opción seleccionada */
+.option.selected {
     background-color: #ff9900;
     border-color: black;
 }
 
-.hidden {
-    display: none;
+/* ===========================
+   Retroalimentación
+=========================== */
+#feedback {
+    font-size: 20px;
+    font-weight: bold;
+    min-height: 30px; /* Reserva espacio para no saltar la interfaz */
 }
-
 
 
