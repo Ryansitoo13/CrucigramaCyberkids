@@ -15,7 +15,7 @@ html, body {
   height: 100%;
   font-family: 'Comic Sans MS', cursive, sans-serif;
   text-align: center;
-  background: linear-gradient(180deg, #ff9069 0%, #ffcfa3 100%); /* degradado naranja */
+  background: linear-gradient(180deg, #ff9069 0%, #ffcfa3 100%); /* Naranja degradado */
 }
 
 /* ===========================
@@ -23,7 +23,7 @@ html, body {
 =========================== */
 h1 {
   font-size: 48px;
-  color: #0b8f00;           /* verde */
+  color: #0b8f00; /* verde */
   margin: 30px 0;
   text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
 }
@@ -66,7 +66,7 @@ button:hover {
 }
 
 #startBtn {
-  background-color: #0000ff; /* azul brillante */
+  background-color: #0000ff; /* azul */
   color: #fff;
 }
 
@@ -119,7 +119,7 @@ button:hover {
   margin: 10px 0;
   font-size: 20px;
   font-weight: bold;
-  min-height: 30px; /* Para no cambiar de tamaño cuando no hay mensaje */
+  min-height: 30px; /* Espacio para no saltar la interfaz */
 }
 
 #score {
