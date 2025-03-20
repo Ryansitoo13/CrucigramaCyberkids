@@ -40,7 +40,7 @@ document.addEventListener("DOMContentLoaded", function() {
     loadQuestion();
   });
 
-  // Cargar la pregunta actual
+  // Cargar una pregunta
   function loadQuestion() {
     const question = questions[currentQuestionIndex];
     questionText.innerText = question.question;
@@ -53,7 +53,9 @@ document.addEventListener("DOMContentLoaded", function() {
       button.innerText = option;
       button.classList.add("option-btn");
       button.addEventListener("click", function() {
+        // Desmarcar previas
         document.querySelectorAll(".option-btn").forEach(btn => btn.classList.remove("selected"));
+        // Seleccionar
         button.classList.add("selected");
         selectedAnswer = option;
         verifyBtn.classList.remove("hidden");
@@ -68,14 +70,14 @@ document.addEventListener("DOMContentLoaded", function() {
     if (selectedAnswer === question.correct) {
       feedback.innerText = "Correcto";
       feedback.style.color = "green";
-      score += 10; // suma de puntos
+      score += 10; // Suma de puntos a gusto
     } else {
       feedback.innerText = "Incorrecto";
       feedback.style.color = "red";
     }
     scoreDisplay.innerText = `Puntos: ${score}`;
 
-    // Mostrar siguiente pregunta con un retardo
+    // Pasamos a la siguiente pregunta con un retardo
     currentQuestionIndex++;
     setTimeout(() => {
       if (currentQuestionIndex < questions.length) {
@@ -89,7 +91,7 @@ document.addEventListener("DOMContentLoaded", function() {
     }, 1000);
   });
 
-  // Reiniciar trivia
+  // Reiniciar el juego
   resetBtn.addEventListener("click", function() {
     currentQuestionIndex = 0;
     score = 0;
@@ -97,9 +99,10 @@ document.addEventListener("DOMContentLoaded", function() {
     feedback.innerText = "";
     verifyBtn.classList.add("hidden");
 
-    // Volver a pantalla de inicio
+    // Regresar a pantalla de inicio
     quizScreen.classList.add("hidden");
     startScreen.classList.remove("hidden");
   });
 });
+
 
